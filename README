@@ -1,0 +1,24 @@
+WordQuiz is the first version of a vocabulary and language-learning program
+under development by Alex Zirbel.
+
+WordQuiz uses QT as a GUI helper with C++ to maintain lists of user-added words
+and includes options for the user to quiz themselves on the lists of words.  It
+also keeps track of the user's mastery of each word in the list.
+
+Thanks to Craig Zirbel for the inspiration for this project, and for early
+implementations!
+
+-------------------------------------------------------------------------------
+
+Licensing information:
+
+This project does not yet have licensing headings, but I fully intend to add
+them as soon as possible. Please do not take advantage of this. Here's what
+the licensing will be in the future:
+
+- All the code for this project is released as open-source
+- Anyone is free to use and distribute the code, or modify and re-distribute.
+- I would like to keep ownership of intellectual property and rights to this
+    code, including control of the project and all commits to it.
+- If you would like to improve on this project, please either talk to me or
+    clone the repository to start your own re-branded version!
