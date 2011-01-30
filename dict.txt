@@ -1,0 +1,6 @@
+hello	hallo
+friend	der Freund
+happy	froh
+funny	lustig
+dog	der Hund
+happy birthday	herzlichen Gluckwunsch zum Geburtstag
