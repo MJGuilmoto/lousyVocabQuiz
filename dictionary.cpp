@@ -1,5 +1,3 @@
-#include "dictionary.h"
-
 /**
  * TODO: make this an interface, and then implement it with two types:
  * 1. CustomDictionary doens't worry about any error checking, syncing,
@@ -7,6 +5,8 @@
  * 2. StandardDictionary makes sure that all the words for a particular
  *      language are consistent, tries to help with style, etc.
  */
+
+#include "dictionary.h"
 
 using namespace std;
 using namespace boost;
@@ -23,7 +23,12 @@ Dictionary::Dictionary()
 void Dictionary::printContents()
 {
     cout << listName << " contents:" << endl;
-    for(DictItr itr (dict.begin()); itr != dict.end(); itr++)
+    /*BOOST_FOREACH(unordered_list<string, string>::value_type itr, dict)
+    {
+        cout << itr->first << " <=> " << itr->second << endl;
+    }*/
+
+    for(unordered_map<string, string>::const_iterator itr (dict.begin()); itr != dict.end(); itr++)
     {
         cout << itr->first << " <=> " << itr->second << endl;
     }
@@ -32,7 +37,7 @@ void Dictionary::printContents()
 void Dictionary::loadFromFile(string filename)
 {
     ifstream dictFile;
-    dictFile.open(filename);
+    dictFile.open(filename.c_str(), ifstream::in);
 
     /* Check for failed file open */
     if(!dictFile.is_open())
@@ -70,7 +75,7 @@ void Dictionary::loadFromFile(string filename)
     dictFile.close();
 }
 
-DictMap Dictionary::getDictionary()
+unordered_map<string, string> Dictionary::getDictionary()
 {
     return dict;
 }

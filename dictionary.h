@@ -11,25 +11,27 @@
 
 #define MAX_WORDLEN 100
 
-typedef unordered_map<string, string> DictMap;
-typedef DictMap::const_iterator DictItr;
+//typedef boost::unordered_map<std::string, std::string> DictMap;
+//typedef DictMap::const_iterator DictItr;
 
 class Dictionary
 {
 /* Keeps track of the language this dictionary contains words from and to. */
-string language1, language2;
+std::string language1, language2;
 
 /* The name of this list (example: "Basic German") */
-string listName;
+std::string listName;
 
 /* The actual list of words */
-DictMap dict;
+boost::unordered_map<std::string, std::string> dict;
+//DictMap dict;
 
 public:
     Dictionary();
     void printContents();
-    void loadFromFile(string filename);
-    DictMap getDictionary();
+    void loadFromFile(std::string filename);
+    boost::unordered_map<std::string, std::string> getDictionary();
+
 };
 
 #endif // DICTIONARY_H

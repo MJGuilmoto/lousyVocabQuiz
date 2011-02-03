@@ -16,12 +16,12 @@
  * Handles all bad file readings. This is the best way to show that a
  * constructor failed, which may be the case when loading dictionaries.
  */
-class LoadFileException : public exception
+class LoadFileException
 {
     virtual const char* what() const throw()
     {
         return "Unable to load dictionary file.";
     }
-}
+};
 
 #endif // EXCEPTIONS_H
