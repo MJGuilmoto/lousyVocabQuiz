@@ -15,6 +15,10 @@
 
 class VocabQuiz
 {
+protected:
+    /* Stores a list of the words in order for quizzing. */
+    std::vector<std::string> quizList;
+    DictMap dict;
 
 public:
     VocabQuiz();
@@ -28,9 +32,6 @@ class FillInVocabQuiz : VocabQuiz
 
 public:
     void LoadDictionary(Dictionary dict);
-
-private:
-    void randomizeList(std::vector<std::string> * list);
 
 };
 

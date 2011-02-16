@@ -16,30 +16,26 @@ VocabQuiz::~VocabQuiz()
 {
 }
 
+/**
+  * Loads a dictionary object (word-answer pairs) into memory and initializes
+  * quizList, an array of all the strings which have not been asked yet.
+  * @param dictionary An object containing mappings of words to meanings.
+  */
 void FillInVocabQuiz::LoadDictionary(Dictionary dictionary)
 {
-    unordered_map<string, string> dict = dictionary.getDictionary();
-
-    /* Stores a list of the words in order for quizzing. */
-    vector<string> quizList;
-
+    dict = dictionary.getDictionary();
+    quizList.clear();
 
     /* We need to get all the keys from the dictionary, and then order them
      * randomly. */
-    for(unordered_map<string, string>::const_iterator itr (dict.begin()); itr != dict.end(); itr++)
+    /*for(unordered_map<string, string>::const_iterator itr (dict.begin());
+        itr != dict.end(); itr++)
     {
         quizList.push_back(itr->first);
-    }
+    }*/
 
     for(unsigned int i=0; i < quizList.size(); i++)
     {
         cout << quizList[i] << endl;
     }
-
-    randomizeList(&quizList);
-}
-
-void FillInVocabQuiz::randomizeList(vector<string> * list)
-{
-
 }

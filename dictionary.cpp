@@ -11,8 +11,6 @@
 using namespace std;
 using namespace boost;
 
-
-
 Dictionary::Dictionary()
 {
     listName = "Default wordlist";
@@ -20,17 +18,13 @@ Dictionary::Dictionary()
     loadFromFile("/home/azirbel/Dropbox/programming/qt/WordQuiz/dict.txt");
 }
 
-void Dictionary::printContents()
+void Dictionary::printContentsStandard()
 {
-    cout << listName << " contents:" << endl;
-    /*BOOST_FOREACH(unordered_list<string, string>::value_type itr, dict)
-    {
-        cout << itr->first << " <=> " << itr->second << endl;
-    }*/
+    cout << listName << " contents in standard mode:" << endl;
 
-    for(unordered_map<string, string>::const_iterator itr (dict.begin()); itr != dict.end(); itr++)
+    for( DictMap::const_iterator itr = dict.begin(); itr != dict.end(); itr++ )
     {
-        cout << itr->first << " <=> " << itr->second << endl;
+        cout << itr->get<language1>() << " <==> " << itr->get<language2>() << endl;
     }
 }
 
@@ -69,13 +63,14 @@ void Dictionary::loadFromFile(string filename)
             LoadFileException exception;
             throw exception;
         }
-        dict[key] = *itr;
+        dict.push_back( translation("hola", "hello") );
+        dict.push_back( translation("adios", "goodbye") );
     }
 
     dictFile.close();
 }
 
-unordered_map<string, string> Dictionary::getDictionary()
+DictMap Dictionary::getDictionary()
 {
     return dict;
 }

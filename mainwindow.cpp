@@ -1,3 +1,14 @@
+/**
+ * @file mainwindow.cpp
+ *
+ * @author Alex Zirbel
+ *
+ * The main interface and organization of the program.  This is intended to
+ * be a GUI only, so that all the backend dictionary and functions are not
+ * involved in QT.  At some point, I may switch from QT to another GUI helper,
+ * and it is critical for the rest of the code to be independent.
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -7,10 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    Dictionary basicDict;
-    basicDict.printContents();
-
-    exit(0);
+    //exit(0);
 }
 
 MainWindow::~MainWindow()
