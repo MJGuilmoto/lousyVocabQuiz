@@ -37,7 +37,7 @@ VocabQuiz::~VocabQuiz()
   * quizList, an array of all the strings which have not been asked yet.
   * @param dictionary An object containing mappings of words to meanings.
   */
-void FillInVocabQuiz::LoadDictionary(Dictionary dictionary)
+void FillInVocabQuiz::loadDictionary(Dictionary dictionary)
 {
     dict = dictionary.getDictionary();
     quizList.clear();

@@ -6,9 +6,7 @@
  * The dictionary class contains functions to load, and eventually edit and
  * save, word lists.  It loads the lists into a bidirectional map
  * (boost::bimap) and stores them in an iterable way.
- */
 
-/**
  * @todo make this an interface, and then implement it with two types:
  * 1. CustomDictionary doens't worry about any error checking, syncing,
  *      word lists, or language-specific stuff.

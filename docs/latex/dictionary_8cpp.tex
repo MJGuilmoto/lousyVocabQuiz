@@ -1,0 +1,30 @@
+\hypertarget{dictionary_8cpp}{
+\section{dictionary.cpp File Reference}
+\label{dictionary_8cpp}\index{dictionary.cpp@{dictionary.cpp}}
+}
+
+
+A class to keep track of a list of words and their translations.  
+
+
+{\ttfamily \#include \char`\"{}dictionary.h\char`\"{}}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$boost/config.hpp$>$}\par
+{\ttfamily \#include $<$boost/foreach.hpp$>$}\par
+{\ttfamily \#include $<$boost/tokenizer.hpp$>$}\par
+{\ttfamily \#include $<$boost/bimap.hpp$>$}\par
+{\ttfamily \#include $<$boost/bimap/bimap.hpp$>$}\par
+{\ttfamily \#include $<$boost/bimap/list\_\-of.hpp$>$}\par
+{\ttfamily \#include $<$boost/bimap/unordered\_\-set\_\-of.hpp$>$}\par
+{\ttfamily \#include $<$exception$>$}\par
+
+
+\subsection{Detailed Description}
+A class to keep track of a list of words and their translations. \begin{DoxyAuthor}{Author}
+Alex Zirbel
+\end{DoxyAuthor}
+The dictionary class contains functions to load, and eventually edit and save, word lists. It loads the lists into a bidirectional map (boost::bimap) and stores them in an iterable way.
+
+\begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]make this an interface, and then implement it with two types: 1. CustomDictionary doens't worry about any error checking, syncing, word lists, or language-\/specific stuff. 2. StandardDictionary makes sure that all the words for a particular language are consistent, tries to help with style, etc. \end{Desc}

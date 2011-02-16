@@ -1,0 +1,13 @@
+Welcome to WordQuiz!
+
+This project was created by Alex Zirbel as a tool for learning languages,
+especially vocabulary - but is meant to be built into a larger open-source
+language tutor program.
+
+New to the project?  Check out the Doxygen documentation to get your
+feet on the ground in terms of project organization. It's here:
+
+docs/html/index.html
+
+This project uses QT for GUI aspects, Boost for backend help, and
+Doxygen for documentation.

@@ -1,0 +1,51 @@
+\hypertarget{classDictionary}{
+\section{Dictionary Class Reference}
+\label{classDictionary}\index{Dictionary@{Dictionary}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDictionary_aee8d612bc9d323c38faba045ba384b8b}{Dictionary} ()
+\item 
+void \hyperlink{classDictionary_ac233f319ff9eab7b54269fd1d571e146}{printContents} (int direction)
+\item 
+\hypertarget{classDictionary_afeca5aa092a92aec62224e720e2304d2}{
+void {\bfseries loadFromFile} (std::string filename)}
+\label{classDictionary_afeca5aa092a92aec62224e720e2304d2}
+
+\item 
+DictMap \hyperlink{classDictionary_a9696c9da75da8f8bfd1a1e2ff071c343}{getDictionary} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDictionary_aee8d612bc9d323c38faba045ba384b8b}{
+\index{Dictionary@{Dictionary}!Dictionary@{Dictionary}}
+\index{Dictionary@{Dictionary}!Dictionary@{Dictionary}}
+\subsubsection[{Dictionary}]{\setlength{\rightskip}{0pt plus 5cm}Dictionary::Dictionary ()}}
+\label{classDictionary_aee8d612bc9d323c38faba045ba384b8b}
+Constructs a default dictionary based on a hardcoded path to a word list. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDictionary_a9696c9da75da8f8bfd1a1e2ff071c343}{
+\index{Dictionary@{Dictionary}!getDictionary@{getDictionary}}
+\index{getDictionary@{getDictionary}!Dictionary@{Dictionary}}
+\subsubsection[{getDictionary}]{\setlength{\rightskip}{0pt plus 5cm}DictMap Dictionary::getDictionary ()}}
+\label{classDictionary_a9696c9da75da8f8bfd1a1e2ff071c343}
+An accessor for the dictionary list. \begin{DoxyReturn}{Returns}
+DictMap A DictMap object with all the words and translations. 
+\end{DoxyReturn}
+\hypertarget{classDictionary_ac233f319ff9eab7b54269fd1d571e146}{
+\index{Dictionary@{Dictionary}!printContents@{printContents}}
+\index{printContents@{printContents}!Dictionary@{Dictionary}}
+\subsubsection[{printContents}]{\setlength{\rightskip}{0pt plus 5cm}void Dictionary::printContents (int {\em direction})}}
+\label{classDictionary_ac233f319ff9eab7b54269fd1d571e146}
+Displays the dictionary name, the direction of translation, and all contents of the given dictionary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em direction}]1 (STANDARD): traverse from \hyperlink{structlang1}{lang1} to \hyperlink{structlang2}{lang2}; or 0 (REVERSE) \end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+dictionary.h\item 
+\hyperlink{dictionary_8cpp}{dictionary.cpp}\end{DoxyCompactItemize}

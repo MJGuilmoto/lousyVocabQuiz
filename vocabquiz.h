@@ -13,7 +13,7 @@ protected:
 public:
     VocabQuiz();
     virtual ~VocabQuiz();
-    virtual void LoadDictionary(Dictionary dict) = 0;
+    virtual void loadDictionary(Dictionary dict) = 0;
 
 };
 
@@ -21,7 +21,7 @@ class FillInVocabQuiz : VocabQuiz
 {
 
 public:
-    void LoadDictionary(Dictionary dict);
+    void loadDictionary(Dictionary dict);
 
 };
 
