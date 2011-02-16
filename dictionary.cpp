@@ -1,5 +1,15 @@
 /**
- * TODO: make this an interface, and then implement it with two types:
+ * @file dictionary.cpp
+ * @brief A class to keep track of a list of words and their translations.
+ * @author Alex Zirbel
+ *
+ * The dictionary class contains functions to load, and eventually edit and
+ * save, word lists.  It loads the lists into a bidirectional map
+ * (boost::bimap) and stores them in an iterable way.
+ */
+
+/**
+ * @todo make this an interface, and then implement it with two types:
  * 1. CustomDictionary doens't worry about any error checking, syncing,
  *      word lists, or language-specific stuff.
  * 2. StandardDictionary makes sure that all the words for a particular
@@ -11,6 +21,9 @@
 using namespace std;
 using namespace boost;
 
+/**
+ * Constructs a default dictionary based on a hardcoded path to a word list.
+ */
 Dictionary::Dictionary()
 {
     listName = "Default wordlist";
@@ -18,16 +31,30 @@ Dictionary::Dictionary()
     loadFromFile("/home/azirbel/Dropbox/programming/qt/WordQuiz/dict.txt");
 }
 
-void Dictionary::printContentsStandard()
+/**
+ * Displays the dictionary name, the direction of translation, and all
+ * contents of the given dictionary.
+ * @param direction 1 (STANDARD): traverse from lang1 to lang2; or 0 (REVERSE)
+ */
+void Dictionary::printContents(int direction)
 {
-    cout << listName << " contents in standard mode:" << endl;
+    string mode = direction ? "standard" : "reverse";
+    cout << listName << " contents in " << mode << " mode:" << endl;
 
     for( DictMap::const_iterator itr = dict.begin(); itr != dict.end(); itr++ )
     {
-        cout << itr->get<language1>() << " <==> " << itr->get<language2>() << endl;
+        if(direction)
+            cout << itr->get<lang1>() << " <=> " << itr->get<lang2>() << endl;
+        else
+            cout << itr->get<lang2>() << " <=> " << itr->get<lang1>() << endl;
     }
 }
 
+/**
+ * Loads the contents of a file (here, one-to-one translation information)
+ * into a DictMap for later use.
+ * @param filename The path and name of the file to load.
+ */
 void Dictionary::loadFromFile(string filename)
 {
     ifstream dictFile;
@@ -63,13 +90,18 @@ void Dictionary::loadFromFile(string filename)
             LoadFileException exception;
             throw exception;
         }
-        dict.push_back( translation("hola", "hello") );
-        dict.push_back( translation("adios", "goodbye") );
+
+        /* Add to the dictionary (DictMap) */
+        dict.push_back( translation(key, *itr) );
     }
 
     dictFile.close();
 }
 
+/**
+ * An accessor for the dictionary list.
+ * @return DictMap A DictMap object with all the words and translations.
+ */
 DictMap Dictionary::getDictionary()
 {
     return dict;

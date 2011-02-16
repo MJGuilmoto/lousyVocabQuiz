@@ -1,13 +1,3 @@
-/**
- * @file vocabquiz.h Defines an abstract VocabQuiz and subclasses.
- *
- * @author Alex Zirbel
- *
- * An interface which defines common methods all vocal quiz types should
- * have, such as the ability to load a dictionary and get the next word
- * to be quizzed over.
- */
-
 #ifndef VOCABQUIZ_H
 #define VOCABQUIZ_H
 

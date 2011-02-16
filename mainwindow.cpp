@@ -1,6 +1,6 @@
 /**
  * @file mainwindow.cpp
- *
+ * @brief The GUI setup function
  * @author Alex Zirbel
  *
  * The main interface and organization of the program.  This is intended to
