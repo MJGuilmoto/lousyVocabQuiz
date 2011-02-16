@@ -11,13 +11,13 @@
 /**
   * @mainpage
   *
-  * @section Introduction
+  * @section intro_sec Introduction
   *
   * Welcome to WordQuiz! This software is intended as the first attempt of
   * language-learning software meant to expand on vocabulary-learning programs
   * by catering the words presented to individual users.
   *
-  * @section Organization and Tools
+  * @section organization_sec Organization and Tools
   *
   * WordQuiz is built on QT for all GUI elements, so I recommend installing
   * QT Creator for help with building on your platform.  WordQuiz also uses
@@ -25,7 +25,7 @@
   * this documentation is thanks to Doxygen, which automatically generates
   * documentation based on inline code comments.
   *
-  * @section Licensing and joining this project
+  * @section licensing_sec Licensing and joining this project
   *
   * WordQuiz is open source under the GNU General Public License. Since it's
   * still young, I haven't looked into licensing very far yet, but I would like
