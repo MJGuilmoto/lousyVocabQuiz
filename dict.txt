@@ -1,6 +1,11 @@
-hello	hallo
-friend	der Freund
-happy	froh
-funny	lustig
-dog	der Hund
+one	eins
+two	zwei
+three	drei
+four	vier
+five	funf
+six	sechs
+seven	sieben
+eight	acht
+nine	neun
+ten	zehn
 happy birthday	herzlichen Gluckwunsch zum Geburtstag

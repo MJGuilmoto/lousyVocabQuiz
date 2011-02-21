@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
     </ul>
   </div>
 </div>
@@ -58,11 +59,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getDictionary()
 : <a class="el" href="classDictionary.html#a9696c9da75da8f8bfd1a1e2ff071c343">Dictionary</a>
 </li>
+<li>getNextRandomElement()
+: <a class="el" href="classFillInVocabQuiz.html#a551b818f3b29e9c72e44cc9c0ba1c4cb">FillInVocabQuiz</a>
+</li>
 <li>loadDictionary()
 : <a class="el" href="classFillInVocabQuiz.html#affe1c2da58f58e96643a5d95bf3a6e47">FillInVocabQuiz</a>
 </li>
 <li>printContents()
 : <a class="el" href="classDictionary.html#ac233f319ff9eab7b54269fd1d571e146">Dictionary</a>
+</li>
+<li>resetQuiz()
+: <a class="el" href="classFillInVocabQuiz.html#af0042ea53197503e5a5a6f25dcece8fd">FillInVocabQuiz</a>
+</li>
+<li>setDirection()
+: <a class="el" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">VocabQuiz</a>
 </li>
 <li>VocabQuiz()
 : <a class="el" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>
@@ -77,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -86,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 16 17:27:32 2011 for WordQuiz by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Feb 21 13:21:20 2011 for WordQuiz by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

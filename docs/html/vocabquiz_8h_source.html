@@ -45,37 +45,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define VOCABQUIZ_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;dictionary.h&quot;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a><a class="code" href="classVocabQuiz.html">00006</a> <span class="keyword">class </span><a class="code" href="classVocabQuiz.html">VocabQuiz</a>
-<a name="l00007"></a>00007 {
-<a name="l00008"></a>00008 <span class="keyword">protected</span>:
-<a name="l00009"></a>00009     <span class="comment">/* Stores a list of the words in order for quizzing. */</span>
-<a name="l00010"></a>00010     std::vector&lt;std::string&gt; quizList;
-<a name="l00011"></a>00011     DictMap dict;
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 <span class="keyword">public</span>:
-<a name="l00014"></a>00014     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>();
-<a name="l00015"></a>00015     <span class="keyword">virtual</span> <a class="code" href="classVocabQuiz.html#a55c4c64161cc8e22643b0daa8dcf95a4">~VocabQuiz</a>();
-<a name="l00016"></a>00016     <span class="keyword">virtual</span> <span class="keywordtype">void</span> loadDictionary(<a class="code" href="classDictionary.html">Dictionary</a> dict) = 0;
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 };
-<a name="l00019"></a>00019 
-<a name="l00020"></a><a class="code" href="classFillInVocabQuiz.html">00020</a> <span class="keyword">class </span><a class="code" href="classFillInVocabQuiz.html">FillInVocabQuiz</a> : <a class="code" href="classVocabQuiz.html">VocabQuiz</a>
-<a name="l00021"></a>00021 {
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">public</span>:
-<a name="l00024"></a>00024     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#affe1c2da58f58e96643a5d95bf3a6e47">loadDictionary</a>(<a class="code" href="classDictionary.html">Dictionary</a> dict);
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 };
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;set&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="classVocabQuiz.html">00007</a> <span class="keyword">class </span><a class="code" href="classVocabQuiz.html">VocabQuiz</a>
+<a name="l00008"></a>00008 {
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="keyword">protected</span>:
+<a name="l00012"></a><a class="code" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">00012</a>     std::set&lt;int&gt; <a class="code" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff" title="Better as boost::unordered_set?">quizList</a>; 
+<a name="l00013"></a>00013     DictMap dict;
+<a name="l00014"></a><a class="code" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585">00014</a>     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585" title="Stores direction of the quiz.">direction</a>;          
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="keyword">public</span>:
+<a name="l00017"></a>00017     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>();
+<a name="l00018"></a>00018     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>(<span class="keywordtype">int</span> myDirection);
+<a name="l00019"></a>00019     <span class="keyword">virtual</span> <a class="code" href="classVocabQuiz.html#a55c4c64161cc8e22643b0daa8dcf95a4">~VocabQuiz</a>();
+<a name="l00020"></a>00020     <span class="keyword">virtual</span> <span class="keywordtype">void</span> loadDictionary(<a class="code" href="classDictionary.html">Dictionary</a> dict) = 0;
+<a name="l00021"></a>00021     <span class="keywordtype">void</span> <a class="code" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">setDirection</a>(<span class="keywordtype">int</span> newDirection);
+<a name="l00022"></a>00022 };
+<a name="l00023"></a>00023 
+<a name="l00024"></a><a class="code" href="classFillInVocabQuiz.html">00024</a> <span class="keyword">class </span><a class="code" href="classFillInVocabQuiz.html">FillInVocabQuiz</a> : <a class="code" href="classVocabQuiz.html">VocabQuiz</a>
+<a name="l00025"></a>00025 {
 <a name="l00027"></a>00027 
-<a name="l00028"></a>00028 <span class="preprocessor">#endif // VOCABQUIZ_H</span>
+<a name="l00028"></a>00028 <span class="keyword">public</span>:
+<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#affe1c2da58f58e96643a5d95bf3a6e47" title="&amp;lt;">loadDictionary</a>(<a class="code" href="classDictionary.html">Dictionary</a> dict);
+<a name="l00030"></a>00030     std::string <a class="code" href="classFillInVocabQuiz.html#a551b818f3b29e9c72e44cc9c0ba1c4cb">getNextRandomElement</a>();
+<a name="l00031"></a>00031     <span class="keywordtype">bool</span> isCorrectAnswer(std::string prompt, std::string answer);
+<a name="l00032"></a>00032     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#af0042ea53197503e5a5a6f25dcece8fd">resetQuiz</a>();
+<a name="l00033"></a>00033     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">VocabQuiz::setDirection</a>;
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 };
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="preprocessor">#endif // VOCABQUIZ_H</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 16 17:27:32 2011 for WordQuiz by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Feb 21 13:21:20 2011 for WordQuiz by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

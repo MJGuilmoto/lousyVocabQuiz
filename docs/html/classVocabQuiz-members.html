@@ -47,9 +47,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>VocabQuiz Member List</h1>This is the complete list of members for <a class="el" href="classVocabQuiz.html">VocabQuiz</a>, including all inherited members.<table>
   <tr bgcolor="#f0f0f0"><td><b>dict</b> (defined in <a class="el" href="classVocabQuiz.html">VocabQuiz</a>)</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585">direction</a></td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td><code> [protected]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>loadDictionary</b>(Dictionary dict)=0 (defined in <a class="el" href="classVocabQuiz.html">VocabQuiz</a>)</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr bgcolor="#f0f0f0"><td><b>quizList</b> (defined in <a class="el" href="classVocabQuiz.html">VocabQuiz</a>)</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">quizList</a></td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">setDirection</a>(int newDirection)</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>()</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classVocabQuiz.html#a7c0575b4418431675956078c9b403166">VocabQuiz</a>(int myDirection)</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classVocabQuiz.html#a55c4c64161cc8e22643b0daa8dcf95a4">~VocabQuiz</a>()</td><td><a class="el" href="classVocabQuiz.html">VocabQuiz</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
 <!--- window showing the filter options -->
@@ -57,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -66,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 16 17:27:33 2011 for WordQuiz by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Feb 21 13:21:24 2011 for WordQuiz by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

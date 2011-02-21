@@ -60,14 +60,19 @@ Inheritance diagram for VocabQuiz:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a7c0575b4418431675956078c9b403166">VocabQuiz</a> (int myDirection)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a55c4c64161cc8e22643b0daa8dcf95a4">~VocabQuiz</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af224c714b231d7ff4a8de770ce7280e3"></a><!-- doxytag: member="VocabQuiz::loadDictionary" ref="af224c714b231d7ff4a8de770ce7280e3" args="(Dictionary dict)=0" -->
 virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>loadDictionary</b> (<a class="el" href="classDictionary.html">Dictionary</a> dict)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">setDirection</a> (int newDirection)</td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d250f48f417926d00a41e6bdbf3d47f"></a><!-- doxytag: member="VocabQuiz::quizList" ref="a3d250f48f417926d00a41e6bdbf3d47f" args="" -->
-std::vector&lt; std::string &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><b>quizList</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::set&lt; int &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">quizList</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Better as boost::unordered_set?  <a href="#a294e44914f7766a1cdfff9ae87c722ff"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9090d47e0a1e8b3b40c39f55afd60a1"></a><!-- doxytag: member="VocabQuiz::dict" ref="af9090d47e0a1e8b3b40c39f55afd60a1" args="" -->
 DictMap&nbsp;</td><td class="memItemRight" valign="bottom"><b>dict</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae316737b7faea73886cff3f88836585"></a><!-- doxytag: member="VocabQuiz::direction" ref="aae316737b7faea73886cff3f88836585" args="" -->
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585">direction</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stores direction of the quiz. <br/></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa9f188fd46b6bfd21c8e1e3d5883d350"></a><!-- doxytag: member="VocabQuiz::VocabQuiz" ref="aa9f188fd46b6bfd21c8e1e3d5883d350" args="()" -->
@@ -84,7 +89,26 @@ DictMap&nbsp;</td><td class="memItemRight" valign="bottom"><b>dict</b></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Default interface constructor does nothing. </p>
+<p>Default interface constructor sets direction to standard </p>
+
+</div>
+</div>
+<a class="anchor" id="a7c0575b4418431675956078c9b403166"></a><!-- doxytag: member="VocabQuiz::VocabQuiz" ref="a7c0575b4418431675956078c9b403166" args="(int myDirection)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VocabQuiz::VocabQuiz </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>myDirection</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Possible to construct with a direction set </p>
 
 </div>
 </div>
@@ -106,6 +130,49 @@ DictMap&nbsp;</td><td class="memItemRight" valign="bottom"><b>dict</b></td></tr>
 
 </div>
 </div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ac9714af01fec150cdbb9d01ab305ff61"></a><!-- doxytag: member="VocabQuiz::setDirection" ref="ac9714af01fec150cdbb9d01ab305ff61" args="(int newDirection)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VocabQuiz::setDirection </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>newDirection</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the direction the vocab quiz asks and evaulates answers in. Direction can either be STANDARD or REVERSE. If STANDARD, the quiz will ask words from <a class="el" href="structlang1.html">lang1</a> and expect answers from <a class="el" href="structlang2.html">lang2</a>; if REVERSE, the opposite is true. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>newDirection</em>&nbsp;</td><td>Direction of quiz, STANDARD or REVERSE </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a294e44914f7766a1cdfff9ae87c722ff"></a><!-- doxytag: member="VocabQuiz::quizList" ref="a294e44914f7766a1cdfff9ae87c722ff" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;int&gt; <a class="el" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">VocabQuiz::quizList</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Better as boost::unordered_set? </p>
+<p>A list of which indices of words are still unused as prompts </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="vocabquiz_8h_source.html">vocabquiz.h</a></li>
 <li><a class="el" href="vocabquiz_8cpp.html">vocabquiz.cpp</a></li>
@@ -116,7 +183,7 @@ DictMap&nbsp;</td><td class="memItemRight" valign="bottom"><b>dict</b></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -125,7 +192,7 @@ DictMap&nbsp;</td><td class="memItemRight" valign="bottom"><b>dict</b></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 16 17:27:33 2011 for WordQuiz by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Feb 21 13:21:24 2011 for WordQuiz by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

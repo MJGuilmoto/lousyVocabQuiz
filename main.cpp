@@ -38,6 +38,7 @@
 #include "mainwindow.h"
 
 #include "dictionary.h"
+#include "vocabquiz.h"
 
 using namespace std;
 
@@ -49,8 +50,36 @@ int main(int argc, char *argv[])
 
     Dictionary basicDict;
     basicDict.printContents(STANDARD);
-    cout << endl;
-    basicDict.printContents(REVERSE);
+
+    FillInVocabQuiz quiz;
+    quiz.loadDictionary(basicDict);
+
+    string nextWord = "";
+    string answer = "";
+
+    // Quiz through the terminal
+    for(int i = 0; i <= 1; i++)
+    {
+        quiz.resetQuiz();
+        quiz.setDirection(i);
+        string direction = (i == STANDARD) ? "STANDARD" : "REVERSE";
+        cout << "Quizzing in " << direction << " direction." << endl;
+
+        while(1)
+        {
+            nextWord = quiz.getNextRandomElement();
+            if( nextWord.empty() )
+                break;
+
+            cout << "Translate \"" << nextWord << "\": " << endl;
+            getline(cin, answer);
+
+            if(quiz.isCorrectAnswer(nextWord, answer))
+                cout << "Correct!" << endl;
+            else
+                cout << "Wrong answer!" << endl;
+        }
+    }
 
     return a.exec();
 }

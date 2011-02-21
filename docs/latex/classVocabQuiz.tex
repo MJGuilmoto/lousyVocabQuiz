@@ -13,26 +13,32 @@ Inheritance diagram for VocabQuiz:\begin{figure}[H]
 \item 
 \hyperlink{classVocabQuiz_aa9f188fd46b6bfd21c8e1e3d5883d350}{VocabQuiz} ()
 \item 
+\hyperlink{classVocabQuiz_a7c0575b4418431675956078c9b403166}{VocabQuiz} (int myDirection)
+\item 
 virtual \hyperlink{classVocabQuiz_a55c4c64161cc8e22643b0daa8dcf95a4}{$\sim$VocabQuiz} ()
 \item 
 \hypertarget{classVocabQuiz_af224c714b231d7ff4a8de770ce7280e3}{
 virtual void {\bfseries loadDictionary} (\hyperlink{classDictionary}{Dictionary} dict)=0}
 \label{classVocabQuiz_af224c714b231d7ff4a8de770ce7280e3}
 
+\item 
+void \hyperlink{classVocabQuiz_ac9714af01fec150cdbb9d01ab305ff61}{setDirection} (int newDirection)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classVocabQuiz_a3d250f48f417926d00a41e6bdbf3d47f}{
-std::vector$<$ std::string $>$ {\bfseries quizList}}
-\label{classVocabQuiz_a3d250f48f417926d00a41e6bdbf3d47f}
-
-\item 
+std::set$<$ int $>$ \hyperlink{classVocabQuiz_a294e44914f7766a1cdfff9ae87c722ff}{quizList}
+\begin{DoxyCompactList}\small\item\em Better as boost::unordered\_\-set? \item\end{DoxyCompactList}\item 
 \hypertarget{classVocabQuiz_af9090d47e0a1e8b3b40c39f55afd60a1}{
 DictMap {\bfseries dict}}
 \label{classVocabQuiz_af9090d47e0a1e8b3b40c39f55afd60a1}
 
-\end{DoxyCompactItemize}
+\item 
+\hypertarget{classVocabQuiz_aae316737b7faea73886cff3f88836585}{
+int \hyperlink{classVocabQuiz_aae316737b7faea73886cff3f88836585}{direction}}
+\label{classVocabQuiz_aae316737b7faea73886cff3f88836585}
+
+\begin{DoxyCompactList}\small\item\em Stores direction of the quiz. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
@@ -41,12 +47,40 @@ DictMap {\bfseries dict}}
 \index{VocabQuiz@{VocabQuiz}!VocabQuiz@{VocabQuiz}}
 \subsubsection[{VocabQuiz}]{\setlength{\rightskip}{0pt plus 5cm}VocabQuiz::VocabQuiz ()}}
 \label{classVocabQuiz_aa9f188fd46b6bfd21c8e1e3d5883d350}
-Default interface constructor does nothing. \hypertarget{classVocabQuiz_a55c4c64161cc8e22643b0daa8dcf95a4}{
+Default interface constructor sets direction to standard \hypertarget{classVocabQuiz_a7c0575b4418431675956078c9b403166}{
+\index{VocabQuiz@{VocabQuiz}!VocabQuiz@{VocabQuiz}}
+\index{VocabQuiz@{VocabQuiz}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{VocabQuiz}]{\setlength{\rightskip}{0pt plus 5cm}VocabQuiz::VocabQuiz (int {\em myDirection})}}
+\label{classVocabQuiz_a7c0575b4418431675956078c9b403166}
+Possible to construct with a direction set \hypertarget{classVocabQuiz_a55c4c64161cc8e22643b0daa8dcf95a4}{
 \index{VocabQuiz@{VocabQuiz}!$\sim$VocabQuiz@{$\sim$VocabQuiz}}
 \index{$\sim$VocabQuiz@{$\sim$VocabQuiz}!VocabQuiz@{VocabQuiz}}
 \subsubsection[{$\sim$VocabQuiz}]{\setlength{\rightskip}{0pt plus 5cm}VocabQuiz::$\sim$VocabQuiz ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{classVocabQuiz_a55c4c64161cc8e22643b0daa8dcf95a4}
 Default interface destructor does nothing This is supposed to "pass pointer ownership to another party without exposing the base class 
+
+\subsection{Member Function Documentation}
+\hypertarget{classVocabQuiz_ac9714af01fec150cdbb9d01ab305ff61}{
+\index{VocabQuiz@{VocabQuiz}!setDirection@{setDirection}}
+\index{setDirection@{setDirection}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{setDirection}]{\setlength{\rightskip}{0pt plus 5cm}void VocabQuiz::setDirection (int {\em newDirection})}}
+\label{classVocabQuiz_ac9714af01fec150cdbb9d01ab305ff61}
+Sets the direction the vocab quiz asks and evaulates answers in. Direction can either be STANDARD or REVERSE. If STANDARD, the quiz will ask words from \hyperlink{structlang1}{lang1} and expect answers from \hyperlink{structlang2}{lang2}; if REVERSE, the opposite is true. 
+\begin{DoxyParams}{Parameters}
+\item[{\em newDirection}]Direction of quiz, STANDARD or REVERSE \end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classVocabQuiz_a294e44914f7766a1cdfff9ae87c722ff}{
+\index{VocabQuiz@{VocabQuiz}!quizList@{quizList}}
+\index{quizList@{quizList}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{quizList}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<$int$>$ {\bf VocabQuiz::quizList}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classVocabQuiz_a294e44914f7766a1cdfff9ae87c722ff}
+
+
+Better as boost::unordered\_\-set? 
+
+A list of which indices of words are still unused as prompts 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
