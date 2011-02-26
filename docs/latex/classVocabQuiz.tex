@@ -23,6 +23,16 @@ virtual void {\bfseries loadDictionary} (\hyperlink{classDictionary}{Dictionary}
 
 \item 
 void \hyperlink{classVocabQuiz_ac9714af01fec150cdbb9d01ab305ff61}{setDirection} (int newDirection)
+\item 
+int \hyperlink{classVocabQuiz_a2316cc4ecacdab87d631aabb50ecc2e5}{getDirection} ()
+\item 
+void \hyperlink{classVocabQuiz_ac858d591b947ad29f464280c995e1d08}{setCaseSensitive} (bool newCaseSensitive)
+\item 
+bool \hyperlink{classVocabQuiz_ad52db1bf5408be282cd76bbdd00c4ac2}{getCaseSensitive} ()
+\item 
+int \hyperlink{classVocabQuiz_a62a61345e1ff01acf56ba7e337e6c1fb}{getNumRight} ()
+\item 
+int \hyperlink{classVocabQuiz_a53b2eecb43a9ae1bc9d975a5e91d8ad6}{getNumWrong} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -38,7 +48,22 @@ DictMap {\bfseries dict}}
 int \hyperlink{classVocabQuiz_aae316737b7faea73886cff3f88836585}{direction}}
 \label{classVocabQuiz_aae316737b7faea73886cff3f88836585}
 
-\begin{DoxyCompactList}\small\item\em Stores direction of the quiz. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Stores direction of the quiz. \item\end{DoxyCompactList}\item 
+\hypertarget{classVocabQuiz_a882a7e2c7666126e836b0bc48765d476}{
+int \hyperlink{classVocabQuiz_a882a7e2c7666126e836b0bc48765d476}{isCaseSensitive}}
+\label{classVocabQuiz_a882a7e2c7666126e836b0bc48765d476}
+
+\begin{DoxyCompactList}\small\item\em Whether to check for capitals or not. \item\end{DoxyCompactList}\item 
+\hypertarget{classVocabQuiz_aa54ad066a9ed72dd85745e04a4c6e4a3}{
+int {\bfseries numRight}}
+\label{classVocabQuiz_aa54ad066a9ed72dd85745e04a4c6e4a3}
+
+\item 
+\hypertarget{classVocabQuiz_ac8fb7099c94406f341011218d8cd04d0}{
+int \hyperlink{classVocabQuiz_ac8fb7099c94406f341011218d8cd04d0}{numWrong}}
+\label{classVocabQuiz_ac8fb7099c94406f341011218d8cd04d0}
+
+\begin{DoxyCompactList}\small\item\em Store how the user is doing. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
@@ -60,6 +85,46 @@ Possible to construct with a direction set \hypertarget{classVocabQuiz_a55c4c641
 Default interface destructor does nothing This is supposed to "pass pointer ownership to another party without exposing the base class 
 
 \subsection{Member Function Documentation}
+\hypertarget{classVocabQuiz_ad52db1bf5408be282cd76bbdd00c4ac2}{
+\index{VocabQuiz@{VocabQuiz}!getCaseSensitive@{getCaseSensitive}}
+\index{getCaseSensitive@{getCaseSensitive}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{getCaseSensitive}]{\setlength{\rightskip}{0pt plus 5cm}bool VocabQuiz::getCaseSensitive ()}}
+\label{classVocabQuiz_ad52db1bf5408be282cd76bbdd00c4ac2}
+Returns the current case sensitivity of the given quiz. \begin{DoxyReturn}{Returns}
+True if the quiz is case sensitive, false otherwise. 
+\end{DoxyReturn}
+\hypertarget{classVocabQuiz_a2316cc4ecacdab87d631aabb50ecc2e5}{
+\index{VocabQuiz@{VocabQuiz}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{getDirection}]{\setlength{\rightskip}{0pt plus 5cm}int VocabQuiz::getDirection ()}}
+\label{classVocabQuiz_a2316cc4ecacdab87d631aabb50ecc2e5}
+Returns the current direction of the quiz, STANDARD or REVERSE. \begin{DoxyReturn}{Returns}
+The current direction of the quiz. 
+\end{DoxyReturn}
+\hypertarget{classVocabQuiz_a62a61345e1ff01acf56ba7e337e6c1fb}{
+\index{VocabQuiz@{VocabQuiz}!getNumRight@{getNumRight}}
+\index{getNumRight@{getNumRight}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{getNumRight}]{\setlength{\rightskip}{0pt plus 5cm}int VocabQuiz::getNumRight ()}}
+\label{classVocabQuiz_a62a61345e1ff01acf56ba7e337e6c1fb}
+Accessor for number of correct answers so far. \begin{DoxyReturn}{Returns}
+Number of questions the user has answered correctly. 
+\end{DoxyReturn}
+\hypertarget{classVocabQuiz_a53b2eecb43a9ae1bc9d975a5e91d8ad6}{
+\index{VocabQuiz@{VocabQuiz}!getNumWrong@{getNumWrong}}
+\index{getNumWrong@{getNumWrong}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{getNumWrong}]{\setlength{\rightskip}{0pt plus 5cm}int VocabQuiz::getNumWrong ()}}
+\label{classVocabQuiz_a53b2eecb43a9ae1bc9d975a5e91d8ad6}
+Accessor for number of incorrect answers so far. \begin{DoxyReturn}{Returns}
+Number of questions the user has answered incorrectly. 
+\end{DoxyReturn}
+\hypertarget{classVocabQuiz_ac858d591b947ad29f464280c995e1d08}{
+\index{VocabQuiz@{VocabQuiz}!setCaseSensitive@{setCaseSensitive}}
+\index{setCaseSensitive@{setCaseSensitive}!VocabQuiz@{VocabQuiz}}
+\subsubsection[{setCaseSensitive}]{\setlength{\rightskip}{0pt plus 5cm}void VocabQuiz::setCaseSensitive (bool {\em newCaseSensitive})}}
+\label{classVocabQuiz_ac858d591b947ad29f464280c995e1d08}
+Sets the case sensitivity preference for the quiz. If the quiz is case sensitive (true), then typing the correct capitalization of words matters when the quiz evaluates responses. Otherwise (false), it doesn't matter. 
+\begin{DoxyParams}{Parameters}
+\item[{\em newCaseSensitive}]True if the quiz should be case sensitive. \end{DoxyParams}
 \hypertarget{classVocabQuiz_ac9714af01fec150cdbb9d01ab305ff61}{
 \index{VocabQuiz@{VocabQuiz}!setDirection@{setDirection}}
 \index{setDirection@{setDirection}!VocabQuiz@{VocabQuiz}}

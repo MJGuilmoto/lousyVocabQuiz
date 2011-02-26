@@ -36,6 +36,7 @@
 
 #include <QtGui/QApplication>
 #include "mainwindow.h"
+#include "quizdialog.h"
 
 #include "dictionary.h"
 #include "vocabquiz.h"
@@ -45,16 +46,19 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    //MainWindow w;
+    //w.show();
 
     Dictionary basicDict;
-    basicDict.printContents(STANDARD);
+    basicDict.printContents();
 
-    FillInVocabQuiz quiz;
-    quiz.loadDictionary(basicDict);
+    FillInVocabQuiz *quiz = new FillInVocabQuiz;
+    quiz->loadDictionary(basicDict);
 
-    string nextWord = "";
+    QuizDialog *quizDialog = new QuizDialog(quiz);
+    quizDialog->show();
+
+    /*string nextWord = "";
     string answer = "";
 
     // Quiz through the terminal
@@ -74,12 +78,12 @@ int main(int argc, char *argv[])
             cout << "Translate \"" << nextWord << "\": " << endl;
             getline(cin, answer);
 
-            if(quiz.isCorrectAnswer(nextWord, answer))
+            if(quiz.checkAnswer(nextWord, answer))
                 cout << "Correct!" << endl;
             else
                 cout << "Wrong answer!" << endl;
         }
-    }
+    }*/
 
     return a.exec();
 }

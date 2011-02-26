@@ -22,7 +22,9 @@ using namespace boost;
 VocabQuiz::VocabQuiz()
 {
     direction = STANDARD;
+    isCaseSensitive = true;
 }
+
 
 /**
  * Possible to construct with a direction set
@@ -30,7 +32,9 @@ VocabQuiz::VocabQuiz()
 VocabQuiz::VocabQuiz(int myDirection)
 {
     direction = myDirection;
+    isCaseSensitive = true;
 }
+
 
 /**
  * Default interface destructor does nothing
@@ -40,6 +44,7 @@ VocabQuiz::VocabQuiz(int myDirection)
 VocabQuiz::~VocabQuiz()
 {
 }
+
 
 /**
  * Sets the direction the vocab quiz asks and evaulates answers in. Direction
@@ -52,6 +57,59 @@ void VocabQuiz::setDirection(int newDirection)
     direction = newDirection;
 }
 
+
+/**
+ * Returns the current direction of the quiz, STANDARD or REVERSE.
+ * @return The current direction of the quiz.
+ */
+int VocabQuiz::getDirection()
+{
+    return direction;
+}
+
+
+/**
+ * Sets the case sensitivity preference for the quiz.  If the quiz is case
+ * sensitive (true), then typing the correct capitalization of words matters
+ * when the quiz evaluates responses.  Otherwise (false), it doesn't matter.
+ * @param newCaseSensitive True if the quiz should be case sensitive.
+ */
+void VocabQuiz::setCaseSensitive(bool newCaseSensitive)
+{
+    isCaseSensitive = newCaseSensitive;
+}
+
+
+/**
+ * Returns the current case sensitivity of the given quiz.
+ * @return True if the quiz is case sensitive, false otherwise.
+ */
+bool VocabQuiz::getCaseSensitive()
+{
+    return isCaseSensitive;
+}
+
+
+/**
+ * Accessor for number of correct answers so far.
+ * @return Number of questions the user has answered correctly.
+ */
+int VocabQuiz::getNumRight()
+{
+    return numRight;
+}
+
+
+/**
+ * Accessor for number of incorrect answers so far.
+ * @return Number of questions the user has answered incorrectly.
+ */
+int VocabQuiz::getNumWrong()
+{
+    return numWrong;
+}
+
+
 /**
  * Loads a dictionary object (word-answer pairs) into memory and initializes
  * quizList, an array of all the strings which have not been asked yet.
@@ -62,6 +120,7 @@ void FillInVocabQuiz::loadDictionary(Dictionary dictionary)
     dict = dictionary.getDictionary();
     resetQuiz();
 }
+
 
 /**
  * Returns a new prompt for the next question, in the given direction (STANDARD or
@@ -99,14 +158,13 @@ string FillInVocabQuiz::getNextRandomElement()
     return toReturn;
 }
 
+
 /**
- * Checks a prompt and answer and returns whether the answer was correct in the
- * loaded dictionary.
+ * Returns a string representing the correct answer for a given prompt.
  * @param prompt The question word (from lang1 if direction is STANDARD)
- * @param answer The entered answer for the prompt
- * @return True if the answer was correct, false otherwise
+ * @return A string representing the correct answer in the current direction.
  */
-bool FillInVocabQuiz::isCorrectAnswer(string prompt, string answer)
+string FillInVocabQuiz::getCorrectAnswer(string prompt)
 {
     string correctAnswer;
 
@@ -119,11 +177,59 @@ bool FillInVocabQuiz::isCorrectAnswer(string prompt, string answer)
         correctAnswer = dict.right.at(prompt);
     }
 
-    if(strcmp(answer.c_str(), correctAnswer.c_str()) == 0)
-        return true;
-    else
-        return false;
+    return correctAnswer;
 }
+
+
+/**
+ * Checks a prompt and answer and returns whether the answer was correct in the
+ * loaded dictionary. Does not change quiz statistics.
+ * @param prompt The question word (from lang1 if direction is STANDARD)
+ * @param answer The entered answer for the prompt
+ * @return True if the answer was correct, false otherwise
+ */
+bool FillInVocabQuiz::isCorrectAnswer(string prompt, string answer)
+{
+    string correctAnswer = getCorrectAnswer(prompt);
+
+    if(isCaseSensitive)
+    {
+        if(boost::equals(answer, correctAnswer))
+            return true;
+        else
+            return false;
+    }
+    else
+    {
+        if(boost::iequals(answer, correctAnswer))
+            return true;
+        else
+            return false;
+    }
+}
+
+
+/**
+ * Checks a prompt and answer and returns whether the answer was correct in the
+ * loaded dictionary. Also keeps track of statistics - number right and wrong.
+ * @param prompt The question word (from lang1 if direction is STANDARD)
+ * @param answer The entered answer for the prompt
+ * @return True if the answer was correct, false otherwise
+ */
+bool FillInVocabQuiz::checkAnswer(string prompt, string answer)
+{
+    if(isCorrectAnswer(prompt, answer))
+    {
+        numRight++;
+        return true;
+    }
+    else
+    {
+        numWrong++;
+        return false;
+    }
+}
+
 
 /**
  * Restarts the quiz, clearing the saved data of words quizzed so far.
@@ -131,6 +237,9 @@ bool FillInVocabQuiz::isCorrectAnswer(string prompt, string answer)
 void FillInVocabQuiz::resetQuiz()
 {
     quizList.clear();
+
+    numRight = 0;
+    numWrong = 0;
 
     for( unsigned int i = 0; i < dict.size(); i++ )
     {

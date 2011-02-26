@@ -13,11 +13,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     dictionary.cpp \
-    vocabquiz.cpp
+    vocabquiz.cpp \
+    quizdialog.cpp
 
 HEADERS  += mainwindow.h \
     dictionary.h \
     vocabquiz.h \
-    exceptions.h
+    exceptions.h \
+    quizdialog.h
 
 FORMS    += mainwindow.ui

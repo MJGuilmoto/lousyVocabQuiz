@@ -65,6 +65,11 @@ Inheritance diagram for VocabQuiz:</div>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af224c714b231d7ff4a8de770ce7280e3"></a><!-- doxytag: member="VocabQuiz::loadDictionary" ref="af224c714b231d7ff4a8de770ce7280e3" args="(Dictionary dict)=0" -->
 virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>loadDictionary</b> (<a class="el" href="classDictionary.html">Dictionary</a> dict)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">setDirection</a> (int newDirection)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a2316cc4ecacdab87d631aabb50ecc2e5">getDirection</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#ac858d591b947ad29f464280c995e1d08">setCaseSensitive</a> (bool newCaseSensitive)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#ad52db1bf5408be282cd76bbdd00c4ac2">getCaseSensitive</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a62a61345e1ff01acf56ba7e337e6c1fb">getNumRight</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a53b2eecb43a9ae1bc9d975a5e91d8ad6">getNumWrong</a> ()</td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::set&lt; int &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">quizList</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Better as boost::unordered_set?  <a href="#a294e44914f7766a1cdfff9ae87c722ff"></a><br/></td></tr>
@@ -73,6 +78,14 @@ DictMap&nbsp;</td><td class="memItemRight" valign="bottom"><b>dict</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae316737b7faea73886cff3f88836585"></a><!-- doxytag: member="VocabQuiz::direction" ref="aae316737b7faea73886cff3f88836585" args="" -->
 int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585">direction</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stores direction of the quiz. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a882a7e2c7666126e836b0bc48765d476"></a><!-- doxytag: member="VocabQuiz::isCaseSensitive" ref="a882a7e2c7666126e836b0bc48765d476" args="" -->
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#a882a7e2c7666126e836b0bc48765d476">isCaseSensitive</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Whether to check for capitals or not. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa54ad066a9ed72dd85745e04a4c6e4a3"></a><!-- doxytag: member="VocabQuiz::numRight" ref="aa54ad066a9ed72dd85745e04a4c6e4a3" args="" -->
+int&nbsp;</td><td class="memItemRight" valign="bottom"><b>numRight</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8fb7099c94406f341011218d8cd04d0"></a><!-- doxytag: member="VocabQuiz::numWrong" ref="ac8fb7099c94406f341011218d8cd04d0" args="" -->
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocabQuiz.html#ac8fb7099c94406f341011218d8cd04d0">numWrong</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Store how the user is doing. <br/></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa9f188fd46b6bfd21c8e1e3d5883d350"></a><!-- doxytag: member="VocabQuiz::VocabQuiz" ref="aa9f188fd46b6bfd21c8e1e3d5883d350" args="()" -->
@@ -131,6 +144,107 @@ int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ad52db1bf5408be282cd76bbdd00c4ac2"></a><!-- doxytag: member="VocabQuiz::getCaseSensitive" ref="ad52db1bf5408be282cd76bbdd00c4ac2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VocabQuiz::getCaseSensitive </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the current case sensitivity of the given quiz. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>True if the quiz is case sensitive, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2316cc4ecacdab87d631aabb50ecc2e5"></a><!-- doxytag: member="VocabQuiz::getDirection" ref="a2316cc4ecacdab87d631aabb50ecc2e5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VocabQuiz::getDirection </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the current direction of the quiz, STANDARD or REVERSE. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The current direction of the quiz. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a62a61345e1ff01acf56ba7e337e6c1fb"></a><!-- doxytag: member="VocabQuiz::getNumRight" ref="a62a61345e1ff01acf56ba7e337e6c1fb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VocabQuiz::getNumRight </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Accessor for number of correct answers so far. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Number of questions the user has answered correctly. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a53b2eecb43a9ae1bc9d975a5e91d8ad6"></a><!-- doxytag: member="VocabQuiz::getNumWrong" ref="a53b2eecb43a9ae1bc9d975a5e91d8ad6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VocabQuiz::getNumWrong </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Accessor for number of incorrect answers so far. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Number of questions the user has answered incorrectly. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac858d591b947ad29f464280c995e1d08"></a><!-- doxytag: member="VocabQuiz::setCaseSensitive" ref="ac858d591b947ad29f464280c995e1d08" args="(bool newCaseSensitive)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VocabQuiz::setCaseSensitive </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>newCaseSensitive</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the case sensitivity preference for the quiz. If the quiz is case sensitive (true), then typing the correct capitalization of words matters when the quiz evaluates responses. Otherwise (false), it doesn't matter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>newCaseSensitive</em>&nbsp;</td><td>True if the quiz should be case sensitive. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ac9714af01fec150cdbb9d01ab305ff61"></a><!-- doxytag: member="VocabQuiz::setDirection" ref="ac9714af01fec150cdbb9d01ab305ff61" args="(int newDirection)" -->
 <div class="memitem">
 <div class="memproto">
@@ -192,7 +306,7 @@ int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Feb 21 13:21:24 2011 for WordQuiz by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Feb 25 19:35:58 2011 for WordQuiz by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

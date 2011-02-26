@@ -27,8 +27,6 @@
 ///////////////////////////////////////////////////////////
 
 #define MAX_WORDLEN 100
-#define STANDARD 1
-#define REVERSE 0
 
 /* Just used as identifiers for which direction we access the elements. */
 struct lang1 {};
@@ -68,7 +66,7 @@ DictMap dict;
 
 public:
     Dictionary();
-    void printContents(int direction);
+    void printContents();
     void loadFromFile(std::string filename);
     DictMap getDictionary();
 

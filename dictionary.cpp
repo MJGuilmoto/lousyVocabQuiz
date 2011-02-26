@@ -34,17 +34,11 @@ Dictionary::Dictionary()
  * contents of the given dictionary.
  * @param direction 1 (STANDARD): traverse from lang1 to lang2; or 0 (REVERSE)
  */
-void Dictionary::printContents(int direction)
+void Dictionary::printContents()
 {
-    string mode = direction ? "standard" : "reverse";
-    cout << listName << " contents in " << mode << " mode:" << endl;
-
     for( DictMap::const_iterator itr = dict.begin(); itr != dict.end(); itr++ )
     {
-        if(direction)
-            cout << itr->get<lang1>() << " <=> " << itr->get<lang2>() << endl;
-        else
-            cout << itr->get<lang2>() << " <=> " << itr->get<lang1>() << endl;
+        cout << itr->get<lang1>() << " <=> " << itr->get<lang2>() << endl;
     }
 }
 

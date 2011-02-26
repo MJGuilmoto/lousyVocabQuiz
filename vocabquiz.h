@@ -3,6 +3,11 @@
 
 #include "dictionary.h"
 #include <set>
+#include <boost/algorithm/string.hpp>
+
+// Settings for this quiz
+#define STANDARD 1
+#define REVERSE 0
 
 class VocabQuiz
 {
@@ -12,6 +17,8 @@ protected:
     std::set<int> quizList; //!< Better as boost::unordered_set?
     DictMap dict;
     int direction;          //!< Stores direction of the quiz
+    int isCaseSensitive;    //!< Whether to check for capitals or not
+    int numRight, numWrong; //!< Store how the user is doing
 
 public:
     VocabQuiz();
@@ -19,6 +26,11 @@ public:
     virtual ~VocabQuiz();
     virtual void loadDictionary(Dictionary dict) = 0;
     void setDirection(int newDirection);
+    int getDirection();
+    void setCaseSensitive(bool newCaseSensitive);
+    bool getCaseSensitive();
+    int getNumRight();
+    int getNumWrong();
 };
 
 class FillInVocabQuiz : VocabQuiz
@@ -28,9 +40,18 @@ class FillInVocabQuiz : VocabQuiz
 public:
     void loadDictionary(Dictionary dict);
     std::string getNextRandomElement();
-    bool isCorrectAnswer(std::string prompt, std::string answer);
+    bool checkAnswer(std::string prompt, std::string answer);
+    std::string getCorrectAnswer(std::string prompt);
     void resetQuiz();
     using VocabQuiz::setDirection;
+    using VocabQuiz::getDirection;
+    using VocabQuiz::setCaseSensitive;
+    using VocabQuiz::getCaseSensitive;
+    using VocabQuiz::getNumRight;
+    using VocabQuiz::getNumWrong;
+
+private:
+    bool isCorrectAnswer(std::string prompt, std::string answer);
 
 };
 
