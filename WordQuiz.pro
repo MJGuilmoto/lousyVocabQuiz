@@ -21,5 +21,4 @@ HEADERS  += mainwindow.h \
     exceptions.h \
     quizdialog.h
 
-FORMS    	+= mainwindow.ui
-RESOURCES	+= spreadsheet.qrc
+RESOURCES	+= wordquiz.qrc

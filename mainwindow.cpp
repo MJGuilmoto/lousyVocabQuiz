@@ -68,7 +68,7 @@ void MainWindow::createActions()
     openAction = new QAction(tr("&Open..."), this);
     openAction->setIcon(QIcon(":/images/open.png"));
     openAction->setShortcut(QKeySequence::Open);
-    openAction->setStatusTip(tr("Open an existing spreadsheet file"));
+    openAction->setStatusTip(tr("Open an existing dictionary file"));
     connect(openAction, SIGNAL(triggered()), this, SLOT(open()));
 
     for (int i = 0; i < MaxRecentFiles; ++i) {
