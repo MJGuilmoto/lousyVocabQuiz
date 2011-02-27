@@ -22,17 +22,18 @@ using namespace boost;
 /**
  * Constructs a default dictionary based on a hardcoded path to a word list.
  */
-Dictionary::Dictionary()
+Dictionary::Dictionary(string dictionaryFile)
 {
-    listName = "Default wordlist";
+    listName = "German Basic";
 
-    loadFromFile("/home/azirbel/Dropbox/programming/qt/WordQuiz/dict.txt");
+    loadFromFile(dictionaryFile);
 }
 
 /**
  * Displays the dictionary name, the direction of translation, and all
  * contents of the given dictionary.
  * @param direction 1 (STANDARD): traverse from lang1 to lang2; or 0 (REVERSE)
+ * @todo remove this method.
  */
 void Dictionary::printContents()
 {

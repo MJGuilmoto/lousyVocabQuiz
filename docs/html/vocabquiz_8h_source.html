@@ -55,48 +55,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00012"></a><a class="code" href="classVocabQuiz.html">00012</a> <span class="keyword">class </span><a class="code" href="classVocabQuiz.html">VocabQuiz</a>
 <a name="l00013"></a>00013 {
 <a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="keyword">protected</span>:
-<a name="l00017"></a><a class="code" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">00017</a>     std::set&lt;int&gt; <a class="code" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff" title="Better as boost::unordered_set?">quizList</a>; 
-<a name="l00018"></a>00018     DictMap dict;
-<a name="l00019"></a><a class="code" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585">00019</a>     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585" title="Stores direction of the quiz.">direction</a>;          
-<a name="l00020"></a><a class="code" href="classVocabQuiz.html#a882a7e2c7666126e836b0bc48765d476">00020</a>     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a882a7e2c7666126e836b0bc48765d476" title="Whether to check for capitals or not.">isCaseSensitive</a>;    
-<a name="l00021"></a><a class="code" href="classVocabQuiz.html#ac8fb7099c94406f341011218d8cd04d0">00021</a>     <span class="keywordtype">int</span> numRight, <a class="code" href="classVocabQuiz.html#ac8fb7099c94406f341011218d8cd04d0" title="Store how the user is doing.">numWrong</a>; 
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">public</span>:
-<a name="l00024"></a>00024     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>();
-<a name="l00025"></a>00025     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>(<span class="keywordtype">int</span> myDirection);
-<a name="l00026"></a>00026     <span class="keyword">virtual</span> <a class="code" href="classVocabQuiz.html#a55c4c64161cc8e22643b0daa8dcf95a4">~VocabQuiz</a>();
-<a name="l00027"></a>00027     <span class="keyword">virtual</span> <span class="keywordtype">void</span> loadDictionary(<a class="code" href="classDictionary.html">Dictionary</a> dict) = 0;
-<a name="l00028"></a>00028     <span class="keywordtype">void</span> <a class="code" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">setDirection</a>(<span class="keywordtype">int</span> newDirection);
-<a name="l00029"></a>00029     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a2316cc4ecacdab87d631aabb50ecc2e5">getDirection</a>();
-<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="classVocabQuiz.html#ac858d591b947ad29f464280c995e1d08">setCaseSensitive</a>(<span class="keywordtype">bool</span> newCaseSensitive);
-<a name="l00031"></a>00031     <span class="keywordtype">bool</span> <a class="code" href="classVocabQuiz.html#ad52db1bf5408be282cd76bbdd00c4ac2">getCaseSensitive</a>();
-<a name="l00032"></a>00032     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a62a61345e1ff01acf56ba7e337e6c1fb">getNumRight</a>();
-<a name="l00033"></a>00033     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a53b2eecb43a9ae1bc9d975a5e91d8ad6">getNumWrong</a>();
-<a name="l00034"></a>00034 };
-<a name="l00035"></a>00035 
-<a name="l00036"></a><a class="code" href="classFillInVocabQuiz.html">00036</a> <span class="keyword">class </span><a class="code" href="classFillInVocabQuiz.html">FillInVocabQuiz</a> : <a class="code" href="classVocabQuiz.html">VocabQuiz</a>
-<a name="l00037"></a>00037 {
+<a name="l00019"></a>00019 <span class="keyword">protected</span>:
+<a name="l00021"></a><a class="code" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff">00021</a>     std::set&lt;int&gt; <a class="code" href="classVocabQuiz.html#a294e44914f7766a1cdfff9ae87c722ff" title="Better as boost::unordered_set?">quizList</a>; 
+<a name="l00022"></a>00022     DictMap dict;
+<a name="l00023"></a><a class="code" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585">00023</a>     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#aae316737b7faea73886cff3f88836585" title="Stores direction of the quiz.">direction</a>;          
+<a name="l00024"></a><a class="code" href="classVocabQuiz.html#a882a7e2c7666126e836b0bc48765d476">00024</a>     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a882a7e2c7666126e836b0bc48765d476" title="Whether to check for capitals or not.">isCaseSensitive</a>;    
+<a name="l00025"></a><a class="code" href="classVocabQuiz.html#ac8fb7099c94406f341011218d8cd04d0">00025</a>     <span class="keywordtype">int</span> numRight, <a class="code" href="classVocabQuiz.html#ac8fb7099c94406f341011218d8cd04d0" title="Store how the user is doing.">numWrong</a>; 
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="keyword">public</span>:
+<a name="l00028"></a>00028     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>();
+<a name="l00029"></a>00029     <a class="code" href="classVocabQuiz.html#aa9f188fd46b6bfd21c8e1e3d5883d350">VocabQuiz</a>(<span class="keywordtype">int</span> myDirection);
+<a name="l00030"></a>00030     <span class="keyword">virtual</span> <a class="code" href="classVocabQuiz.html#a55c4c64161cc8e22643b0daa8dcf95a4">~VocabQuiz</a>();
+<a name="l00031"></a>00031     <span class="keyword">virtual</span> <span class="keywordtype">void</span> loadDictionary(<a class="code" href="classDictionary.html">Dictionary</a> dict) = 0;
+<a name="l00032"></a>00032     <span class="keywordtype">void</span> <a class="code" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">setDirection</a>(<span class="keywordtype">int</span> newDirection);
+<a name="l00033"></a>00033     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a2316cc4ecacdab87d631aabb50ecc2e5">getDirection</a>();
+<a name="l00034"></a>00034     <span class="keywordtype">void</span> <a class="code" href="classVocabQuiz.html#ac858d591b947ad29f464280c995e1d08">setCaseSensitive</a>(<span class="keywordtype">bool</span> newCaseSensitive);
+<a name="l00035"></a>00035     <span class="keywordtype">bool</span> <a class="code" href="classVocabQuiz.html#ad52db1bf5408be282cd76bbdd00c4ac2">getCaseSensitive</a>();
+<a name="l00036"></a>00036     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a62a61345e1ff01acf56ba7e337e6c1fb">getNumRight</a>();
+<a name="l00037"></a>00037     <span class="keywordtype">int</span> <a class="code" href="classVocabQuiz.html#a53b2eecb43a9ae1bc9d975a5e91d8ad6">getNumWrong</a>();
+<a name="l00038"></a>00038 };
 <a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="keyword">public</span>:
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#affe1c2da58f58e96643a5d95bf3a6e47" title="&amp;lt;">loadDictionary</a>(<a class="code" href="classDictionary.html">Dictionary</a> dict);
-<a name="l00042"></a>00042     std::string <a class="code" href="classFillInVocabQuiz.html#a551b818f3b29e9c72e44cc9c0ba1c4cb">getNextRandomElement</a>();
-<a name="l00043"></a>00043     <span class="keywordtype">bool</span> checkAnswer(std::string prompt, std::string answer);
-<a name="l00044"></a>00044     std::string getCorrectAnswer(std::string prompt);
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#af0042ea53197503e5a5a6f25dcece8fd">resetQuiz</a>();
-<a name="l00046"></a>00046     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">VocabQuiz::setDirection</a>;
-<a name="l00047"></a>00047     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#a2316cc4ecacdab87d631aabb50ecc2e5">VocabQuiz::getDirection</a>;
-<a name="l00048"></a>00048     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ac858d591b947ad29f464280c995e1d08">VocabQuiz::setCaseSensitive</a>;
-<a name="l00049"></a>00049     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ad52db1bf5408be282cd76bbdd00c4ac2">VocabQuiz::getCaseSensitive</a>;
-<a name="l00050"></a>00050     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#a62a61345e1ff01acf56ba7e337e6c1fb">VocabQuiz::getNumRight</a>;
-<a name="l00051"></a>00051     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#a53b2eecb43a9ae1bc9d975a5e91d8ad6">VocabQuiz::getNumWrong</a>;
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 <span class="keyword">private</span>:
-<a name="l00054"></a>00054     <span class="keywordtype">bool</span> isCorrectAnswer(std::string prompt, std::string answer);
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056 };
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058 <span class="preprocessor">#endif // VOCABQUIZ_H</span>
+<a name="l00040"></a><a class="code" href="classFillInVocabQuiz.html">00040</a> <span class="keyword">class </span><a class="code" href="classFillInVocabQuiz.html">FillInVocabQuiz</a> : <a class="code" href="classVocabQuiz.html">VocabQuiz</a>
+<a name="l00041"></a>00041 {
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="keyword">public</span>:
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#affe1c2da58f58e96643a5d95bf3a6e47" title="&amp;lt;">loadDictionary</a>(<a class="code" href="classDictionary.html">Dictionary</a> dict);
+<a name="l00046"></a>00046     std::string <a class="code" href="classFillInVocabQuiz.html#a551b818f3b29e9c72e44cc9c0ba1c4cb">getNextRandomElement</a>();
+<a name="l00047"></a>00047     <span class="keywordtype">bool</span> checkAnswer(std::string prompt, std::string answer);
+<a name="l00048"></a>00048     std::string getCorrectAnswer(std::string prompt);
+<a name="l00049"></a>00049     <span class="keywordtype">void</span> <a class="code" href="classFillInVocabQuiz.html#af0042ea53197503e5a5a6f25dcece8fd">resetQuiz</a>();
+<a name="l00050"></a>00050     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ac9714af01fec150cdbb9d01ab305ff61">VocabQuiz::setDirection</a>;
+<a name="l00051"></a>00051     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#a2316cc4ecacdab87d631aabb50ecc2e5">VocabQuiz::getDirection</a>;
+<a name="l00052"></a>00052     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ac858d591b947ad29f464280c995e1d08">VocabQuiz::setCaseSensitive</a>;
+<a name="l00053"></a>00053     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#ad52db1bf5408be282cd76bbdd00c4ac2">VocabQuiz::getCaseSensitive</a>;
+<a name="l00054"></a>00054     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#a62a61345e1ff01acf56ba7e337e6c1fb">VocabQuiz::getNumRight</a>;
+<a name="l00055"></a>00055     <span class="keyword">using</span> <a class="code" href="classVocabQuiz.html#a53b2eecb43a9ae1bc9d975a5e91d8ad6">VocabQuiz::getNumWrong</a>;
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 <span class="keyword">private</span>:
+<a name="l00058"></a>00058     <span class="keywordtype">bool</span> isCorrectAnswer(std::string prompt, std::string answer);
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 };
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="preprocessor">#endif // VOCABQUIZ_H</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Feb 25 19:35:53 2011 for WordQuiz by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Sun Feb 27 02:02:29 2011 for WordQuiz by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

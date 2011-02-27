@@ -46,44 +46,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //MainWindow w;
-    //w.show();
-
-    Dictionary basicDict;
-    basicDict.printContents();
-
-    FillInVocabQuiz *quiz = new FillInVocabQuiz;
-    quiz->loadDictionary(basicDict);
-
-    QuizDialog *quizDialog = new QuizDialog(quiz);
-    quizDialog->show();
-
-    /*string nextWord = "";
-    string answer = "";
-
-    // Quiz through the terminal
-    for(int i = 0; i <= 1; i++)
-    {
-        quiz.resetQuiz();
-        quiz.setDirection(i);
-        string direction = (i == STANDARD) ? "STANDARD" : "REVERSE";
-        cout << "Quizzing in " << direction << " direction." << endl;
-
-        while(1)
-        {
-            nextWord = quiz.getNextRandomElement();
-            if( nextWord.empty() )
-                break;
-
-            cout << "Translate \"" << nextWord << "\": " << endl;
-            getline(cin, answer);
-
-            if(quiz.checkAnswer(nextWord, answer))
-                cout << "Correct!" << endl;
-            else
-                cout << "Wrong answer!" << endl;
-        }
-    }*/
+    MainWindow w;
+    w.show();
 
     return a.exec();
 }

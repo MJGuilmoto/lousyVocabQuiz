@@ -9,9 +9,8 @@ QT       += core gui
 TARGET = WordQuiz
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     dictionary.cpp \
     vocabquiz.cpp \
     quizdialog.cpp
@@ -22,4 +21,5 @@ HEADERS  += mainwindow.h \
     exceptions.h \
     quizdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    	+= mainwindow.ui
+RESOURCES	+= spreadsheet.qrc

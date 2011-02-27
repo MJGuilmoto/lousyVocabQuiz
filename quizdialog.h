@@ -22,7 +22,8 @@ int numCorrect, numWrong;
 
 public:
     //QuizDialog(QWidget *parent = 0);
-    QuizDialog(FillInVocabQuiz *quiz, QWidget *parent = 0);
+    QuizDialog(QWidget *parent = 0);
+    bool loadDictionary(std::string filename);
 
 signals:
     void findNext(const QString &str, Qt::CaseSensitivity cs);

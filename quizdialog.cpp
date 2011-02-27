@@ -1,3 +1,15 @@
+/**
+ * @file quizdialog.cpp
+ * @brief The quiz element of the WordQuiz window
+ * @author Alex Zirbel
+ *
+ * The GUI element that sets up and runs the vocab quiz.  Contains
+ * its own reference to a quiz and methods to set up that quiz in different
+ * ways depending on interface buttons which are clicked.
+ *
+ * Encapsulates running the entire vocab quiz, given a dictionary file.
+ */
+
 #include <QtGui>
 
 #include "quizdialog.h"
@@ -8,13 +20,13 @@ using namespace std;
  * Sets up all elements of the QuizDialog widget, and initializes the
  * FillInVocabQuiz which runs in the background.
  */
-QuizDialog::QuizDialog(FillInVocabQuiz *quiz, QWidget *parent) : QDialog(parent)
+QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
 {
     // List of elements
     title = new QLabel
             (tr("<font size=4><b>Quizzing from English to German:</b></font>"));
-    prompt = new QLabel(tr("<word>"));
-    info = new QLabel(tr("<info>"));
+    prompt = new QLabel(tr(""));
+    info = new QLabel(tr(""));
     answer = new QLineEdit;
     prompt->setBuddy(answer);
 
@@ -22,15 +34,17 @@ QuizDialog::QuizDialog(FillInVocabQuiz *quiz, QWidget *parent) : QDialog(parent)
     reverseCheckBox = new QCheckBox(tr("Reverse &Direction"));
 
     checkButton = new QPushButton(tr("&Check"));
-    checkButton->setDefault(true);
+    checkButton->setDefault(false);
 
     resetButton = new QPushButton(tr("&Reset Quiz"));
-    resetButton->setDefault(true);
+    resetButton->setDefault(false);
 
-    closeButton = new QPushButton(tr("Close"));
+    closeButton = new QPushButton(tr("Close Widget"));
 
     // Actions which happen when buttons are clicked
     connect(checkButton, SIGNAL(clicked()),
+            this, SLOT(checkAnswer()));
+    connect(answer, SIGNAL(returnPressed()),
             this, SLOT(checkAnswer()));
     connect(resetButton, SIGNAL(clicked()),
             this, SLOT(resetClicked()));
@@ -82,7 +96,8 @@ QuizDialog::QuizDialog(FillInVocabQuiz *quiz, QWidget *parent) : QDialog(parent)
     setMinimumWidth(500);
 
     // Initialize the quiz to be run in this widget
-    myQuiz = quiz;
+    //! @todo Guard against accessing this before loadDictionary is called.
+    myQuiz = new FillInVocabQuiz;
     getNextPrompt();
 }
 
@@ -113,7 +128,9 @@ void QuizDialog::checkAnswer()
         myQuiz->setCaseSensitive(false);
 
     if(myQuiz->checkAnswer(curPrompt, text.toStdString()))
+    {
         info->setText("Correct!");
+    }
     else
     {
         string response = "Wrong - \"" + curPrompt + "\" is: \"" +
@@ -131,6 +148,7 @@ void QuizDialog::resetClicked()
 {
     myQuiz->resetQuiz();
     info->setText("");
+    answer->setText("");
     getNextPrompt();
 }
 
@@ -158,4 +176,28 @@ void QuizDialog::getNextPrompt()
 
     curPrompt = myQuiz->getNextRandomElement();
     prompt->setText(QString(curPrompt.c_str()));
+    answer->selectAll();
+}
+
+/**
+ * Loads a dictionary for the quiz stored by this QuizDialog, from file.
+ *
+ * Loads the file into a new Dictionary object, then calls loadDictionary()
+ * from the quiz object.
+ * @param filename The full path to the dictionary file.
+ * @return True if the load was successful. Currently, only throws an
+ *      exception otherwise.
+ * @todo Don't throw an exception if the file can't be loaded - just return
+ *      false.
+ */
+bool QuizDialog::loadDictionary(string filename)
+{
+    Dictionary *dict = new Dictionary(filename);
+    myQuiz->loadDictionary(*dict);
+    myQuiz->resetQuiz();
+    info->setText("");
+    answer->setText("");
+    getNextPrompt();
+
+    return true;
 }

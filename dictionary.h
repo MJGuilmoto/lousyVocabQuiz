@@ -1,10 +1,6 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
-///////////////////////////////////////////////////////////
-// STANDARD AND BOOST-SPECIFIC INCLUDES
-///////////////////////////////////////////////////////////
-
 #include <iostream>
 #include <fstream>
 #include <boost/config.hpp>
@@ -16,15 +12,8 @@
 #include <boost/bimap/list_of.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
 
-///////////////////////////////////////////////////////////
-// RELATIVE INCLUDES
-///////////////////////////////////////////////////////////
-
 #include "exceptions.h"
 
-///////////////////////////////////////////////////////////
-// DEFINTIONS
-///////////////////////////////////////////////////////////
 
 #define MAX_WORDLEN 100
 
@@ -48,10 +37,6 @@ typedef boost::bimap
 
 typedef DictMap::value_type translation;
 
-///////////////////////////////////////////////////////////
-// CLASS DICTIONARY
-///////////////////////////////////////////////////////////
-
 class Dictionary
 {
 /* Keeps track of the language this dictionary contains words from and to. */
@@ -65,7 +50,7 @@ std::string listName;
 DictMap dict;
 
 public:
-    Dictionary();
+    Dictionary(std::string dictionaryFile);
     void printContents();
     void loadFromFile(std::string filename);
     DictMap getDictionary();

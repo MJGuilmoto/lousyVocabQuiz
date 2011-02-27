@@ -5,7 +5,10 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classDictionary_aee8d612bc9d323c38faba045ba384b8b}{Dictionary} ()
+\hypertarget{classDictionary_a3607b27bd51b778d6fee817fdf19d6bf}{
+{\bfseries Dictionary} (std::string dictionaryFile)}
+\label{classDictionary_a3607b27bd51b778d6fee817fdf19d6bf}
+
 \item 
 void \hyperlink{classDictionary_a2dbee36571908c93d96cfe885f25272e}{printContents} ()
 \item 
@@ -17,14 +20,6 @@ void {\bfseries loadFromFile} (std::string filename)}
 DictMap \hyperlink{classDictionary_a9696c9da75da8f8bfd1a1e2ff071c343}{getDictionary} ()
 \end{DoxyCompactItemize}
 
-
-\subsection{Constructor \& Destructor Documentation}
-\hypertarget{classDictionary_aee8d612bc9d323c38faba045ba384b8b}{
-\index{Dictionary@{Dictionary}!Dictionary@{Dictionary}}
-\index{Dictionary@{Dictionary}!Dictionary@{Dictionary}}
-\subsubsection[{Dictionary}]{\setlength{\rightskip}{0pt plus 5cm}Dictionary::Dictionary ()}}
-\label{classDictionary_aee8d612bc9d323c38faba045ba384b8b}
-Constructs a default dictionary based on a hardcoded path to a word list. 
 
 \subsection{Member Function Documentation}
 \hypertarget{classDictionary_a9696c9da75da8f8bfd1a1e2ff071c343}{
@@ -43,6 +38,8 @@ DictMap A DictMap object with all the words and translations.
 Displays the dictionary name, the direction of translation, and all contents of the given dictionary. 
 \begin{DoxyParams}{Parameters}
 \item[{\em direction}]1 (STANDARD): traverse from \hyperlink{structlang1}{lang1} to \hyperlink{structlang2}{lang2}; or 0 (REVERSE) \end{DoxyParams}
+\begin{Desc}
+\item[\hyperlink{todo__todo000002}{Todo}]remove this method. \end{Desc}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

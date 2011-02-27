@@ -12,6 +12,10 @@
 class VocabQuiz
 {
 
+ /** @todo Guard against accessing things here if the quiz is uninitialized
+   (no dictionary has been set up for it yet) */
+
+
 protected:
     /** A list of which indices of words are still unused as prompts */
     std::set<int> quizList; //!< Better as boost::unordered_set?
