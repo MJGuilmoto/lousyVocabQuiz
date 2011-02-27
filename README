@@ -5,7 +5,11 @@ especially vocabulary - but is meant to be built into a larger open-source
 language tutor program.
 
 New to the project?  Check out the Doxygen documentation to get your
-feet on the ground in terms of project organization. It's here:
+feet on the ground in terms of project organization. Install doxygen, then run it with:
+
+doxygen Doxyfile
+
+Doxyfile is included in the version control.  After you've created the doxygen documentation, check out this file:
 
 docs/html/index.html
 
