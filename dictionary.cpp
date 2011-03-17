@@ -99,3 +99,18 @@ DictMap Dictionary::getDictionary()
 {
     return dict;
 }
+
+string Dictionary::getLang1Name()
+{
+    return lang1Name;
+}
+
+string Dictionary::getLang2Name()
+{
+    return lang2Name;
+}
+
+string Dictionary::getListName()
+{
+    return listName;
+}

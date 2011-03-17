@@ -40,8 +40,7 @@ typedef DictMap::value_type translation;
 class Dictionary
 {
 /* Keeps track of the language this dictionary contains words from and to. */
-//! @todo replace with struct language1,2 stuff
-//std::string language1, language2;
+std::string lang1Name, lang2Name;
 
 /* The name of this list (example: "Basic German") */
 std::string listName;
@@ -54,6 +53,9 @@ public:
     void printContents();
     void loadFromFile(std::string filename);
     DictMap getDictionary();
+    std::string getLang1Name();
+    std::string getLang2Name();
+    std::string getListName();
 
 };
 

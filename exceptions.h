@@ -24,4 +24,15 @@ class LoadFileException
     }
 };
 
+/**
+ * Handles the case when a requested profile does not exist.
+ */
+class NoSuchProfileException
+{
+    virtual const char* what() const throw()
+    {
+        return "No such user profile exists.";
+    }
+};
+
 #endif // EXCEPTIONS_H

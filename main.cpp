@@ -6,6 +6,8 @@
  * The main control for what happens in WordQuiz.
  * Almost nothing should happen in this class itself, except for
  * connecting the GUI to the dictionary and backend.
+ *
+ * @todo Introduce unit testing - CppUnit
  */
 
 /**
