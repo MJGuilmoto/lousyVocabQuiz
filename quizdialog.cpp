@@ -20,9 +20,10 @@ using namespace std;
  * Sets up all elements of the QuizDialog widget, and initializes the
  * FillInVocabQuiz which runs in the background.
  */
-QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
+QuizDialog::QuizDialog(QuizList *myList, QWidget *parent) : QDialog(parent)
 {
     // List of elements
+    listName = new QLabel(tr("No Dictionary Loaded."));
     title = new QLabel
             (tr("<font size=4><b>Quizzing from English to German:</b></font>"));
     prompt = new QLabel(tr(""));
@@ -39,8 +40,6 @@ QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
     resetButton = new QPushButton(tr("&Reset Quiz"));
     resetButton->setDefault(false);
 
-    closeButton = new QPushButton(tr("Close Widget"));
-
     // Actions which happen when buttons are clicked
     connect(checkButton, SIGNAL(clicked()),
             this, SLOT(checkAnswer()));
@@ -48,8 +47,6 @@ QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
             this, SLOT(checkAnswer()));
     connect(resetButton, SIGNAL(clicked()),
             this, SLOT(resetClicked()));
-    connect(closeButton, SIGNAL(clicked()),
-            this, SLOT(close()));
 
     // The layout is broken up into three horizontal sections, each of which is
     // split as necessary into vertical secitons.
@@ -68,7 +65,6 @@ QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
 
     QVBoxLayout *resetsBox = new QVBoxLayout;
     resetsBox->addWidget(resetButton);
-    resetsBox->addWidget(closeButton);
 
     QHBoxLayout *bottomBox = new QHBoxLayout;
     bottomBox->addLayout(optionsBox);
@@ -82,6 +78,7 @@ QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
     hLine2->setFrameShadow(QFrame::Sunken);
 
     QVBoxLayout *mainBox = new QVBoxLayout;
+    mainBox->addWidget(listName);
     mainBox->addWidget(title);
     mainBox->addWidget(hLine);
     mainBox->addLayout(quizBox);
@@ -97,8 +94,13 @@ QuizDialog::QuizDialog(QWidget *parent) : QDialog(parent)
 
     // Initialize the quiz to be run in this widget
     //! @todo Guard against accessing this before loadDictionary is called.
-    myQuiz = new FillInVocabQuiz;
+    quiz = new FillInVocabQuiz(myList);
     getNextPrompt();
+}
+
+QuizDialog::~QuizDialog()
+{
+    cout << "Quiz Dialog object destroyed." << endl;
 }
 
 /**
@@ -112,9 +114,9 @@ void QuizDialog::checkAnswer()
 
     if(strcmp(curPrompt.c_str(), "") == 0)
     {
-        string sRight = boost::lexical_cast<string>(myQuiz->getNumRight());
+        string sRight = boost::lexical_cast<string>(quiz->getNumRight());
         string sWrong = boost::lexical_cast<string>
-                        (myQuiz->getNumWrong() + myQuiz->getNumRight());
+                        (quiz->getNumWrong() + quiz->getNumRight());
         string endString = "End of quiz. You answered " + sRight + "/" + sWrong
                         + " correctly.";
         info->setText(QString(endString.c_str()));
@@ -123,18 +125,18 @@ void QuizDialog::checkAnswer()
 
     // Check if the response was right: set case sensitivity
     if(caseCheckBox->isChecked())
-        myQuiz->setCaseSensitive(true);
+        quiz->setCaseSensitive(true);
     else
-        myQuiz->setCaseSensitive(false);
+        quiz->setCaseSensitive(false);
 
-    if(myQuiz->checkAnswer(curPrompt, text.toStdString()))
+    if(quiz->checkAnswer(text.toStdString()))
     {
         info->setText("Correct!");
     }
     else
     {
         string response = "Wrong - \"" + curPrompt + "\" is: \"" +
-                          myQuiz->getCorrectAnswer(curPrompt) + "\".";
+                          quiz->getCorrectAnswer() + "\".";
         info->setText(QString(response.c_str()));
     }
 
@@ -146,7 +148,7 @@ void QuizDialog::checkAnswer()
  */
 void QuizDialog::resetClicked()
 {
-    myQuiz->resetQuiz();
+    quiz->resetQuiz();
     info->setText("");
     answer->setText("");
     getNextPrompt();
@@ -163,41 +165,18 @@ void QuizDialog::getNextPrompt()
     // At this point, reverse direction if it needed to be reversed.
     if(reverseCheckBox->isChecked())
     {
-        myQuiz->setDirection(REVERSE);
+        quiz->setDirection(REVERSE);
         title->setText(tr(
                 "<font size=4><b>Quizzing from German to English:</b></font>"));
     }
     else
     {
-        myQuiz->setDirection(STANDARD);
+        quiz->setDirection(STANDARD);
         title->setText(tr(
                 "<font size=4><b>Quizzing from English to German:</b></font>"));
     }
 
-    curPrompt = myQuiz->getNextRandomElement();
+    curPrompt = quiz->nextPrompt();
     prompt->setText(QString(curPrompt.c_str()));
     answer->selectAll();
-}
-
-/**
- * Loads a dictionary for the quiz stored by this QuizDialog, from file.
- *
- * Loads the file into a new Dictionary object, then calls loadDictionary()
- * from the quiz object.
- * @param filename The full path to the dictionary file.
- * @return True if the load was successful. Currently, only throws an
- *      exception otherwise.
- * @todo Don't throw an exception if the file can't be loaded - just return
- *      false.
- */
-bool QuizDialog::loadDictionary(string filename)
-{
-    Dictionary *dict = new Dictionary(filename);
-    myQuiz->loadDictionary(*dict);
-    myQuiz->resetQuiz();
-    info->setText("");
-    answer->setText("");
-    getNextPrompt();
-
-    return true;
 }

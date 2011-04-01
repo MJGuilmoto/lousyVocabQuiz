@@ -13,7 +13,6 @@ public:
 
     UserProfile* createNewProfile(std::string username);
     UserProfile* loadProfile(std::string username);
-    void saveToFile(UserProfile profile);
     bool profileExists(std::string username);
 };
 

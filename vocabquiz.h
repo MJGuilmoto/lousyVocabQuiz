@@ -1,7 +1,8 @@
 #ifndef VOCABQUIZ_H
 #define VOCABQUIZ_H
 
-#include "dictionary.h"
+#include "quizlist.h"
+
 #include <set>
 #include <boost/algorithm/string.hpp>
 
@@ -9,32 +10,32 @@
 #define STANDARD 1
 #define REVERSE 0
 
+//! An abstract base class
 class VocabQuiz
 {
 
- /** @todo Guard against accessing things here if the quiz is uninitialized
-   (no dictionary has been set up for it yet) */
-
-
 protected:
-    /** A list of which indices of words are still unused as prompts */
-    std::set<int> quizList; //!< Better as boost::unordered_set?
-    DictMap dict;
+    std::string lang1;
+    std::string lang2;
+    QuizList *list;
+    Connection *curConn;
     int direction;          //!< Stores direction of the quiz
     int isCaseSensitive;    //!< Whether to check for capitals or not
     int numRight, numWrong; //!< Store how the user is doing
 
 public:
-    VocabQuiz();
-    VocabQuiz(int myDirection);
-    virtual ~VocabQuiz();
-    virtual void loadDictionary(Dictionary dict) = 0;
+    VocabQuiz() { }
+    ~VocabQuiz();
+
     void setDirection(int newDirection);
     int getDirection();
+    void resetQuiz();
     void setCaseSensitive(bool newCaseSensitive);
     bool getCaseSensitive();
     int getNumRight();
     int getNumWrong();
+
+    virtual std::string getQuizType() =0;
 };
 
 class FillInVocabQuiz : VocabQuiz
@@ -42,21 +43,22 @@ class FillInVocabQuiz : VocabQuiz
 //!< @todo Variables like "caseSensitive" and other answer-checking options
 
 public:
-    void loadDictionary(Dictionary dict);
-    std::string getNextRandomElement();
-    bool checkAnswer(std::string prompt, std::string answer);
-    std::string getCorrectAnswer(std::string prompt);
-    void resetQuiz();
+    FillInVocabQuiz(QuizList *myList);
+
+    std::string nextPrompt();
+    bool isCorrectAnswer(std::string answer);
+    bool checkAnswer(std::string answer);
+    std::string getCorrectAnswer();
+
     using VocabQuiz::setDirection;
     using VocabQuiz::getDirection;
     using VocabQuiz::setCaseSensitive;
     using VocabQuiz::getCaseSensitive;
     using VocabQuiz::getNumRight;
     using VocabQuiz::getNumWrong;
+    using VocabQuiz::resetQuiz;
 
-private:
-    bool isCorrectAnswer(std::string prompt, std::string answer);
-
+    std::string getQuizType();
 };
 
 #endif // VOCABQUIZ_H

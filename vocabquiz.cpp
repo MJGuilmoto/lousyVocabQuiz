@@ -1,6 +1,6 @@
 /**
  * @file vocabquiz.cpp
- * @brief An interface for different quiz types and definitions for each type.
+ * @brief Manages the entire backend of each kind of quiz.
  * @author Alex Zirbel
  *
  * The main VocabQuiz interface is built to be general: it can load a list
@@ -19,27 +19,20 @@ using namespace boost;
 /**
  * Default interface constructor sets direction to standard
  */
-VocabQuiz::VocabQuiz()
+FillInVocabQuiz::FillInVocabQuiz(QuizList *myList)
 {
     direction = STANDARD;
     isCaseSensitive = true;
+    list = myList;
+    resetQuiz();
 }
 
-
-/**
- * Possible to construct with a direction set
- */
-VocabQuiz::VocabQuiz(int myDirection)
-{
-    direction = myDirection;
-    isCaseSensitive = true;
-}
 
 
 /**
  * Default interface destructor does nothing
  * This is supposed to "pass pointer ownership to another party without
- * exposing the base class
+ * exposing the base class"
  */
 VocabQuiz::~VocabQuiz()
 {
@@ -111,51 +104,36 @@ int VocabQuiz::getNumWrong()
 
 
 /**
- * Loads a dictionary object (word-answer pairs) into memory and initializes
- * quizList, an array of all the strings which have not been asked yet.
- * @param dictionary An object containing mappings of words to meanings.
- */
-void FillInVocabQuiz::loadDictionary(Dictionary dictionary)
-{
-    dict = dictionary.getDictionary();
-    resetQuiz();
-}
-
-
-/**
- * Returns a new prompt for the next question, in the given direction (STANDARD or
- * REVERSE).  Prompts are guaranteed never to repeat throughout the course of a test.
+ * Returns a new prompt for the next question, in the given direction
+ * (STANDARD or REVERSE).  Prompts are guaranteed never to repeat throughout
+ * the course of a test.
+ *
+ * Grabs the current connection, and at the end of the method advances the
+ * iterator.
  * @return The next randomly selected prompt word, or "" if out of words.
  */
-string FillInVocabQuiz::getNextRandomElement()
+string FillInVocabQuiz::nextPrompt()
 {
-    if(quizList.size() == 0)
-        return "";
-
-    srand( time(NULL) );
-    int nextElementIndex = rand() % quizList.size();
-    set<int>::iterator listItr = quizList.begin();
-    for(int i=0; i<nextElementIndex; i++) listItr++;
-    int nextElementNum = *listItr;
-    quizList.erase( quizList.find(nextElementNum) );
-
-    string toReturn;
-
-    DictMap::const_iterator dictItr = dict.begin();
-    for(int i = 0; i < nextElementNum; i++)
+    //! @todo More input checks
+    /*if(*(list->listItr) == NULL)
     {
-        dictItr++;
+        return "";
+    }*/
+
+    if(list->listItr == (list->connList).end())
+    {
+        return "";
     }
+
+    //! @todo This is ugly and might not be correct. Change later.
+    curConn = &(*(list->listItr));
 
     if(direction == STANDARD)
-    {
-       toReturn = dictItr->get<lang1>();
-    }
+        return curConn->getWord1();
     else
-    {
-        toReturn = dictItr->get<lang2>();
-    }
-    return toReturn;
+        return curConn->getWord2();
+
+    (list->listItr)++;
 }
 
 
@@ -164,20 +142,13 @@ string FillInVocabQuiz::getNextRandomElement()
  * @param prompt The question word (from lang1 if direction is STANDARD)
  * @return A string representing the correct answer in the current direction.
  */
-string FillInVocabQuiz::getCorrectAnswer(string prompt)
+string FillInVocabQuiz::getCorrectAnswer()
 {
-    string correctAnswer;
-
+    //! @todo return all possibilities
     if(direction == STANDARD)
-    {
-        correctAnswer = dict.left.at(prompt);
-    }
+        return curConn->getWord2();
     else
-    {
-        correctAnswer = dict.right.at(prompt);
-    }
-
-    return correctAnswer;
+        return curConn->getWord1();
 }
 
 
@@ -188,26 +159,20 @@ string FillInVocabQuiz::getCorrectAnswer(string prompt)
  * @param answer The entered answer for the prompt
  * @return True if the answer was correct, false otherwise
  */
-bool FillInVocabQuiz::isCorrectAnswer(string prompt, string answer)
+bool FillInVocabQuiz::isCorrectAnswer(string answer)
 {
-    string correctAnswer = getCorrectAnswer(prompt);
+    Connection *inputConn;
 
-    if(isCaseSensitive)
-    {
-        if(boost::equals(answer, correctAnswer))
-            return true;
-        else
-            return false;
-    }
+    if(direction == STANDARD)
+        inputConn = new Connection(lang1, lang2, curConn->getWord1(), answer);
     else
-    {
-        if(boost::iequals(answer, correctAnswer))
-            return true;
-        else
-            return false;
-    }
-}
+        inputConn = new Connection(lang1, lang2, answer, curConn->getWord2());
 
+    if(list->contains(*inputConn, isCaseSensitive))
+        return true;
+
+    return false;
+}
 
 /**
  * Checks a prompt and answer and returns whether the answer was correct in the
@@ -216,9 +181,9 @@ bool FillInVocabQuiz::isCorrectAnswer(string prompt, string answer)
  * @param answer The entered answer for the prompt
  * @return True if the answer was correct, false otherwise
  */
-bool FillInVocabQuiz::checkAnswer(string prompt, string answer)
+bool FillInVocabQuiz::checkAnswer(string answer)
 {
-    if(isCorrectAnswer(prompt, answer))
+    if(isCorrectAnswer(answer))
     {
         numRight++;
         return true;
@@ -234,15 +199,15 @@ bool FillInVocabQuiz::checkAnswer(string prompt, string answer)
 /**
  * Restarts the quiz, clearing the saved data of words quizzed so far.
  */
-void FillInVocabQuiz::resetQuiz()
+void VocabQuiz::resetQuiz()
 {
-    quizList.clear();
+    list->listItr = (list->connList).begin();
 
     numRight = 0;
     numWrong = 0;
+}
 
-    for( unsigned int i = 0; i < dict.size(); i++ )
-    {
-        quizList.insert(i);
-    }
+string FillInVocabQuiz::getQuizType()
+{
+    return "FillInVocabQuiz";
 }

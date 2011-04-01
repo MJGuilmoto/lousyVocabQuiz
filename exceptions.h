@@ -5,6 +5,9 @@
  * program in case of failure, but also provide easy error messages and allow
  * higher parts of the program to catch the exception and handle it without
  * crashing outright.
+ *
+ * @todo Something about the way I throw exceptions may not be supported in
+ * QT. This should be fixed. Preferably by QT =P
  */
 
 #ifndef EXCEPTIONS_H
@@ -32,6 +35,19 @@ class NoSuchProfileException
     virtual const char* what() const throw()
     {
         return "No such user profile exists.";
+    }
+};
+
+/**
+ * Exception which means the specified languages are invalid.
+ * For example, if the languages a word translates from and to are the same,
+ * this exception will be thrown because a language must be invalid.
+ */
+class InvalidLanguageException
+{
+    virtual const char* what() const throw()
+    {
+        return "One or more languages specified are invalid.";
     }
 };
 

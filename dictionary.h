@@ -11,6 +11,7 @@
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/list_of.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "exceptions.h"
 
@@ -55,7 +56,7 @@ public:
     DictMap getDictionary();
     std::string getLang1Name();
     std::string getLang2Name();
-    std::string getListName();
+    std::string getDictionaryName();
 
 };
 

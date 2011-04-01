@@ -14,19 +14,26 @@ SOURCES += main.cpp\
     dictionary.cpp \
     vocabquiz.cpp \
     quizdialog.cpp \
+    logindialog.cpp \
     userprofile.cpp \
     profilemanager.cpp \
     connection.cpp \
-    quizlist.cpp
+    quizlist.cpp \
+    menudialog.cpp \
+    languagedialog.cpp
 
 HEADERS  += mainwindow.h \
     dictionary.h \
     vocabquiz.h \
     exceptions.h \
     quizdialog.h \
+    logindialog.h \
     userprofile.h \
     profilemanager.h \
     connection.h \
-    quizlist.h
+    quizlist.h \
+    util_global.h \
+    menudialog.h \
+    languagedialog.h
 
 RESOURCES	+= wordquiz.qrc

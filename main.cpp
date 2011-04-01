@@ -8,6 +8,7 @@
  * connecting the GUI to the dictionary and backend.
  *
  * @todo Introduce unit testing - CppUnit
+ * @todo Get resources to work
  */
 
 /**
@@ -43,6 +44,10 @@
 #include "dictionary.h"
 #include "vocabquiz.h"
 
+
+//! @todo temporary
+#include "quizlist.h"
+
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -52,4 +57,7 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
+    /*MasterList *ml = new MasterList;
+    ml->importDictionaryFromFile("/home/azirbel/Desktop/GermanLevel1.txt");
+    ml->printContents();*/
 }

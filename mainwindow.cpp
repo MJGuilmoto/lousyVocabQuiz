@@ -11,13 +11,16 @@
 
 #include <QtGui>
 
-#include "quizdialog.h"
 #include "mainwindow.h"
 
 MainWindow::MainWindow()
 {
-    quizDialog = new QuizDialog();
-    setCentralWidget(quizDialog);
+    loginDialog = new LoginDialog();
+    menuDialog = new MenuDialog();
+
+    setCentralWidget(menuDialog);
+
+    connect(loginDialog, SIGNAL(submitProfile(UserProfile*)), this, SLOT(handleLogin(UserProfile*)));
 
     createActions();
     createMenus();
@@ -25,6 +28,9 @@ MainWindow::MainWindow()
     setCurrentFile("");
 
     setWindowTitle(tr("WordQuiz"));
+
+    setMinimumHeight(STD_HEIGHT);
+    setMinimumWidth(STD_WIDTH);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -112,12 +118,15 @@ void MainWindow::createMenus()
 
 bool MainWindow::loadFile(const QString &fileName)
 {
-    if (!quizDialog->loadDictionary(fileName.toStdString())) {
+    nextToQuiz = new MasterList;
+    nextToQuiz->importDictionaryFromFile(fileName.toStdString());
+    /*if (!currentUser->importDictionaryFromFile(fileName.toStdString())) {
         statusBar()->showMessage(tr("Loading canceled"), 2000);
         return false;
-    }
+    }*/
 
     setCurrentFile(fileName);
+
     return true;
 }
 
@@ -161,4 +170,29 @@ void MainWindow::updateRecentFileActions()
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
+}
+
+void MainWindow::showLoginScreen()
+{
+    setCentralWidget(loginDialog);
+}
+
+void MainWindow::showQuizScreen()
+{
+    setCentralWidget(quizDialog);
+}
+
+void MainWindow::handleLogin(UserProfile *profile)
+{
+    currentUser = *profile;
+
+    setCentralWidget(menuDialog);
+}
+
+void MainWindow::startQuiz()
+{
+    QuizList *temp = new MasterList;
+    quizDialog = new QuizDialog(temp);
+
+    setCentralWidget(quizDialog);
 }

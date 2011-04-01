@@ -16,24 +16,20 @@ class QuizDialog : public QDialog
 
 // The backend quiz object being used in this gui quiz interace.
 
-FillInVocabQuiz *myQuiz;
+FillInVocabQuiz *quiz;
 std::string curPrompt;
 int numCorrect, numWrong;
 
 public:
-    //QuizDialog(QWidget *parent = 0);
-    QuizDialog(QWidget *parent = 0);
-    bool loadDictionary(std::string filename);
-
-signals:
-    void findNext(const QString &str, Qt::CaseSensitivity cs);
-    void findPrevious(const QString &str, Qt::CaseSensitivity cs);
+    QuizDialog(QuizList *myList, QWidget *parent = 0);
+    ~QuizDialog();
 
 private slots:
     void checkAnswer();
     void resetClicked();
 
 private:
+    QLabel *listName;
     QLabel *title;
     QLabel *prompt;
     QLabel *info;
@@ -42,7 +38,6 @@ private:
     QCheckBox *reverseCheckBox;
     QPushButton *checkButton;
     QPushButton *resetButton;
-    QPushButton *closeButton;
     void getNextPrompt();
 };
 

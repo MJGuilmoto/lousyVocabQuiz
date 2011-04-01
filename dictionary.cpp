@@ -24,8 +24,6 @@ using namespace boost;
  */
 Dictionary::Dictionary(string dictionaryFile)
 {
-    listName = "German Basic";
-
     loadFromFile(dictionaryFile);
 }
 
@@ -53,7 +51,7 @@ void Dictionary::loadFromFile(string filename)
     ifstream dictFile;
     dictFile.open(filename.c_str(), ifstream::in);
 
-    /* Check for failed file open */
+    // Check for failed file open
     if(!dictFile.is_open())
     {
         LoadFileException exception;
@@ -62,7 +60,63 @@ void Dictionary::loadFromFile(string filename)
 
     string line;
 
-    /* Read the entire dictionary file */
+    // The first line of the file is the dictionary name
+    getline(dictFile, listName);
+
+    // Read the languages from the top of the dictionary file
+    getline(dictFile, line);
+
+    if(dictFile.eof())
+    {
+        // This is a malformed file if it does not have languages first.
+        LoadFileException exception;
+        throw exception;
+    }
+
+    // Tokenize based on tab characters
+    char_separator <char> sep("\t");
+    tokenizer <char_separator <char> > tokens(line, sep);
+    tokenizer<char_separator <char> >::iterator itr = tokens.begin();
+    string myLang1 = *itr;
+
+    // Make sure there are at least two tokens; ignore any additional
+    itr++;
+    if(itr == tokens.end())
+    {
+        throw new LoadFileException;
+    }
+    string myLang2 = *itr;
+
+    // Add to the dictionary (DictMap)
+    bool isBackward = false;
+
+    cout << "MyLang1: <" << myLang1 << ">, myLang2: <" << myLang2 << ">" << endl;
+
+    // Check to see if the languages are equal (this is not allowed)
+    if(boost::iequals(myLang1, myLang2))
+    {
+        throw new LoadFileException;
+    }
+
+    // isBackward makes sure the languages are sorted alphabetically when
+    // words are added to the dictionary.
+    if(boost::ilexicographical_compare(myLang1, myLang2) < 0)
+    //if(boost::algorithm::lexicographical_compare(myLang1, myLang2, boost::is_iless()) < 0)
+    {
+        isBackward = true;
+        lang1Name = myLang2;
+        lang2Name = myLang1;
+    }
+    else
+    {
+        isBackward = false;
+        lang2Name = myLang2;
+        lang1Name = myLang1;
+    }
+
+    return;
+
+    // Read the entire dictionary file
     while(dictFile.good())
     {
         getline(dictFile, line);
@@ -70,22 +124,24 @@ void Dictionary::loadFromFile(string filename)
         if(dictFile.eof())
             break;
 
-        /* Tokenize based on tab characters */
+        // Tokenize based on tab characters
         char_separator <char> sep("\t");
         tokenizer <char_separator <char> > tokens(line, sep);
         tokenizer<char_separator <char> >::iterator itr = tokens.begin();
         string key = *itr;
 
-        /* Make sure there are at least two tokens; ignore any additional */
+        // Make sure there are at least two tokens; ignore any additional
         itr++;
         if(itr == tokens.end())
         {
-            LoadFileException exception;
-            throw exception;
+            throw new LoadFileException;
         }
 
-        /* Add to the dictionary (DictMap) */
-        dict.push_back( translation(key, *itr) );
+        // Add to the dictionary (DictMap)
+        if(isBackward)
+            dict.push_back( translation(*itr, key) );
+        else
+            dict.push_back( translation(key, *itr) );
     }
 
     dictFile.close();
@@ -110,7 +166,7 @@ string Dictionary::getLang2Name()
     return lang2Name;
 }
 
-string Dictionary::getListName()
+string Dictionary::getDictionaryName()
 {
     return listName;
 }
