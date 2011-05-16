@@ -9,18 +9,21 @@
  * and it is critical for the rest of the code to be independent.
  */
 
-#include <QtGui>
+#include "mainwindow.hpp"
 
-#include "mainwindow.h"
-
+/**
+ * Set up the main window and set a default widget.
+ * @todo Add a homepage as the default widget?
+ */
 MainWindow::MainWindow()
 {
-    loginDialog = new LoginDialog();
-    menuDialog = new MenuDialog();
+    /* Set up the login dialog as the default widget. Handler methods
+       are responsible for creating and running other dialogs. */
+    loginDialog = new LoginDialog;
+    setCentralWidget(loginDialog);
 
-    setCentralWidget(menuDialog);
-
-    connect(loginDialog, SIGNAL(submitProfile(UserProfile*)), this, SLOT(handleLogin(UserProfile*)));
+    connect(loginDialog, SIGNAL(submitProfile(UserProfile*)), this,
+        SLOT(handleLogin(UserProfile*)));
 
     createActions();
     createMenus();
@@ -120,10 +123,6 @@ bool MainWindow::loadFile(const QString &fileName)
 {
     nextToQuiz = new MasterList;
     nextToQuiz->importDictionaryFromFile(fileName.toStdString());
-    /*if (!currentUser->importDictionaryFromFile(fileName.toStdString())) {
-        statusBar()->showMessage(tr("Loading canceled"), 2000);
-        return false;
-    }*/
 
     setCurrentFile(fileName);
 
@@ -182,10 +181,39 @@ void MainWindow::showQuizScreen()
     setCentralWidget(quizDialog);
 }
 
+/**
+ * Once the login dialog returns an acceptable user profile, sets that profile
+ * as the current user's profile and moves on to the next dialog (language
+ * choosing).
+ * @param profile The loaded user profile
+ */
 void MainWindow::handleLogin(UserProfile *profile)
 {
+    // Process this login
     currentUser = *profile;
 
+    // Set up and load the new languageDialog
+    languageDialog = new LanguageDialog;
+    connect(languageDialog, SIGNAL(submitLanguagePair(LanguagePair*)), this,
+        SLOT(handleLanguageChoice(LanguagePair*)));
+
+    setCentralWidget(languageDialog);
+}
+
+/**
+ * Once the language chooser dialog returns an acceptable pair of languages,
+ * it returns those languages as a languagePair so that the mainwindow knows
+ * what the user wants to study.
+ * @param languages The set of two languages the user will study, including
+ *  which one is the user's home language.
+ */
+void MainWindow::handleLanguageChoice(LanguagePair *languages)
+{
+    currentLanguages = *languages;
+
+    menuDialog = new MenuDialog;
+    connect(menuDialog, SIGNAL(submitProfile(UserProfile*)), this,
+        SLOT(handleLogin(UserProfile*)));
     setCentralWidget(menuDialog);
 }
 

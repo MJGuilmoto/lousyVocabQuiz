@@ -12,7 +12,7 @@
 
 #include <QtGui>
 
-#include "quizdialog.h"
+#include "quizdialog.hpp"
 
 using namespace std;
 
@@ -89,8 +89,6 @@ QuizDialog::QuizDialog(QuizList *myList, QWidget *parent) : QDialog(parent)
     // Window settings
     setWindowTitle(tr("WordQuiz"));
     setTabOrder(answer, checkButton);
-    setFixedHeight(sizeHint().height());
-    setMinimumWidth(500);
 
     // Initialize the quiz to be run in this widget
     //! @todo Guard against accessing this before loadDictionary is called.

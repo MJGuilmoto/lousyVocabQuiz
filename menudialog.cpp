@@ -6,7 +6,7 @@
 
 #include <QtGui>
 
-#include "menudialog.h"
+#include "menudialog.hpp"
 
 using namespace std;
 

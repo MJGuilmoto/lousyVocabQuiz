@@ -38,17 +38,7 @@
   */
 
 #include <QtGui/QApplication>
-#include "mainwindow.h"
-#include "quizdialog.h"
-
-#include "dictionary.h"
-#include "vocabquiz.h"
-
-
-//! @todo temporary
-#include "quizlist.h"
-
-using namespace std;
+#include "mainwindow.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -57,7 +47,4 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
-    /*MasterList *ml = new MasterList;
-    ml->importDictionaryFromFile("/home/azirbel/Desktop/GermanLevel1.txt");
-    ml->printContents();*/
 }

@@ -13,5 +13,5 @@ Doxyfile is included in the version control.  After you've created the doxygen d
 
 docs/html/index.html
 
-This project uses QT for GUI aspects, Boost for backend help, and
+This project uses QT for GUI, Boost for backend help, and
 Doxygen for documentation.

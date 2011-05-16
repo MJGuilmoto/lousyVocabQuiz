@@ -11,7 +11,7 @@
  *   - FillInVocabQuiz
  */
 
-#include "vocabquiz.h"
+#include "vocabquiz.hpp"
 
 using namespace std;
 using namespace boost;
