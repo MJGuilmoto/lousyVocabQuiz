@@ -11,20 +11,14 @@
 
 #include "mainwindow.hpp"
 
+using namespace std;
+
 /**
  * Set up the main window and set a default widget.
  * @todo Add a homepage as the default widget?
  */
 MainWindow::MainWindow()
 {
-    /* Set up the login dialog as the default widget. Handler methods
-       are responsible for creating and running other dialogs. */
-    loginDialog = new LoginDialog;
-    setCentralWidget(loginDialog);
-
-    connect(loginDialog, SIGNAL(submitProfile(UserProfile*)), this,
-        SLOT(handleLogin(UserProfile*)));
-
     createActions();
     createMenus();
 
@@ -34,6 +28,8 @@ MainWindow::MainWindow()
 
     setMinimumHeight(STD_HEIGHT);
     setMinimumWidth(STD_WIDTH);
+
+    switchToLoginDialog();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -44,8 +40,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-                               tr("Open Dictionary"), ".",
-                               tr("Text files (*.txt)"));
+                                                    tr("Open Dictionary"), ".",
+                                                    tr("Text files (*.txt)"));
     if (!fileName.isEmpty())
         loadFile(fileName);
 }
@@ -53,10 +49,10 @@ void MainWindow::open()
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About WordQuiz"),
-            tr("<h2>WordQuiz 1.0</h2>"
-               "<p>Copyright &copy; 2011 Alex Zirbel"
-               "<p>WordQuiz is a lightweight vocabulary"
-               "quizzing program.</p>"));
+                       tr("<h2>WordQuiz 1.0</h2>"
+                          "<p>Copyright &copy; 2011 Alex Zirbel"
+                          "<p>WordQuiz is a lightweight vocabulary"
+                          "quizzing program.</p>"));
 }
 
 void MainWindow::openRecentFile()
@@ -71,6 +67,7 @@ void MainWindow::updateStatusBar()
     locationLabel->setText("location");
     formulaLabel->setText("formula");
 }
+
 
 void MainWindow::createActions()
 {
@@ -100,6 +97,7 @@ void MainWindow::createActions()
     aboutQtAction->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
+
 
 void MainWindow::createMenus()
 {
@@ -166,20 +164,57 @@ void MainWindow::updateRecentFileActions()
     separatorAction->setVisible(!recentFiles.isEmpty());
 }
 
+
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
 }
 
-void MainWindow::showLoginScreen()
+
+void MainWindow::switchToLoginDialog()
 {
+    loginDialog = new LoginDialog;
     setCentralWidget(loginDialog);
+
+    connect(loginDialog, SIGNAL(submitProfile(UserProfile*)), this,
+            SLOT(handleLogin(UserProfile*)));
+    //! @todo switch to newprofile
+    connect(loginDialog, SIGNAL(requestNewProfile()), this,
+            SLOT(switchToNewProfileDialog()));
 }
 
-void MainWindow::showQuizScreen()
+
+void MainWindow::switchToNewProfileDialog()
 {
-    setCentralWidget(quizDialog);
+    newProfileDialog = new NewProfileDialog();
+    /*connect(newProfileDialog, SIGNAL(submitProfile(UserProfile*)), this,
+            SLOT(handleLogin(UserProfile*)));*/
+    connect(newProfileDialog, SIGNAL(back()), this,
+            SLOT(switchToLoginDialog()));
+
+    setCentralWidget(newProfileDialog);
 }
+
+
+void MainWindow::switchToLanguageDialog()
+{
+    // Set up and load the new languageDialog
+    languageDialog = new LanguageDialog;
+    connect(languageDialog, SIGNAL(submitLanguagePair(LanguagePair*)), this,
+            SLOT(handleLanguageChoice(LanguagePair*)));
+    connect(languageDialog, SIGNAL(back()), this,
+            SLOT(switchToLoginDialog()));
+
+    setCentralWidget(languageDialog);
+}
+
+
+void MainWindow::switchToMenuDialog()
+{
+    menuDialog = new MenuDialog;
+    setCentralWidget(menuDialog);
+}
+
 
 /**
  * Once the login dialog returns an acceptable user profile, sets that profile
@@ -192,13 +227,9 @@ void MainWindow::handleLogin(UserProfile *profile)
     // Process this login
     currentUser = *profile;
 
-    // Set up and load the new languageDialog
-    languageDialog = new LanguageDialog;
-    connect(languageDialog, SIGNAL(submitLanguagePair(LanguagePair*)), this,
-        SLOT(handleLanguageChoice(LanguagePair*)));
-
-    setCentralWidget(languageDialog);
+    switchToLanguageDialog();
 }
+
 
 /**
  * Once the language chooser dialog returns an acceptable pair of languages,
@@ -211,11 +242,8 @@ void MainWindow::handleLanguageChoice(LanguagePair *languages)
 {
     currentLanguages = *languages;
 
-    menuDialog = new MenuDialog;
-    connect(menuDialog, SIGNAL(submitProfile(UserProfile*)), this,
-        SLOT(handleLogin(UserProfile*)));
-    setCentralWidget(menuDialog);
 }
+
 
 void MainWindow::startQuiz()
 {

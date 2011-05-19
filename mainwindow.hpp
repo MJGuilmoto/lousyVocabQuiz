@@ -11,9 +11,10 @@
 #include <QtGui>
 
 #include "quizdialog.hpp"
+#include "logindialog.hpp"
+#include "newprofiledialog.hpp"
 #include "languagedialog.hpp"
 #include "menudialog.hpp"
-#include "logindialog.hpp"
 
 #include "languagepair.hpp"
 #include "userprofile.hpp"
@@ -22,7 +23,10 @@
 
 class QAction;
 class QLabel;
+//! @todo remove - I don't think these are necessary
 class LoginDialog;
+class LanguageDialog;
+class NewProfileDialog;
 class QuizDialog;
 
 class MainWindow : public QMainWindow
@@ -30,6 +34,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 LoginDialog *loginDialog;
+NewProfileDialog *newProfileDialog;
 LanguageDialog *languageDialog;
 MenuDialog *menuDialog;
 QuizDialog *quizDialog;
@@ -71,11 +76,15 @@ private slots:
     void about();
     void openRecentFile();
     void updateStatusBar();
+
+    void switchToLoginDialog();
+    void switchToNewProfileDialog();
+    void switchToLanguageDialog();
+    void switchToMenuDialog();
+
     void handleLogin(UserProfile *profile);
     void handleLanguageChoice(LanguagePair *languages);
     void startQuiz();
-    void showLoginScreen();
-    void showQuizScreen();
 
 private:
     void createActions();

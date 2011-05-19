@@ -88,10 +88,17 @@ LanguagePair::LanguagePair(string myLang1, string myLang2, int whichIsHome)
 /**
  * The only function that should be called to create a language pair from
  * a string.
+ * @param line A single line to be loaded from, assumed to be saved from
+ *  languagePair's exportToLine function.
+ * @param status A return code: 0 if everything as expected, and 1 if
+ *  the order of languages was reversed (ie they needed sorting).
+ * @return True if the load was successful, false otherwise
  */
-bool LanguagePair::loadFromLine(string line)
+bool LanguagePair::loadFromLine(string line, int *status)
 {
     string myLang1, myLang2;
+
+    *status = 0;
 
     // Tokenize based on tab characters
     char_separator <char> sep("\t");
@@ -143,6 +150,7 @@ bool LanguagePair::loadFromLine(string line)
         lang1 = myLang2;
         lang2 = myLang1;
         homeLang = (homeLang == 1) ? 2 : 1;
+        *status = 1;
     }
 
     valid = true;

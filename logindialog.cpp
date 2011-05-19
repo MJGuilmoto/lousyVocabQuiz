@@ -13,13 +13,12 @@
 
 using namespace std;
 
-ProfileManager *profileManager;
-
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent)
 {
     profileManager = new ProfileManager;
 
     loginPrompt = new QLabel(tr("Login as:"));
+    loginPrompt->setObjectName("h1");
     usernameLineEdit = new QLineEdit;
 
     loginButton = new QPushButton(tr("&Login"));
@@ -43,8 +42,10 @@ LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent)
     loginHBox->addWidget(newProfileButton);
 
     QVBoxLayout *mainBox = new QVBoxLayout;
+    mainBox->addStretch();
     mainBox->addWidget(loginPrompt);
     mainBox->addLayout(loginHBox);
+    mainBox->addStretch();
 
     setLayout(mainBox);
 
@@ -58,7 +59,6 @@ LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent)
 
 LoginDialog::~LoginDialog()
 {
-    cout << "Login Dialog object destroyed." << endl;
 }
 
 
@@ -102,18 +102,5 @@ void LoginDialog::loginClicked()
  */
 void LoginDialog::newProfileClicked()
 {
-    if(profileManager == NULL)
-        throw new InvalidProfileManagerException;
-
-    string username = (usernameLineEdit->text()).toStdString();
-
-    if(profileManager->profileExists(username))
-    {
-        cout << "The profile already exists!" << endl;
-        return;
-    }
-
-    UserProfile *profile = profileManager->createNewProfile(username);
-
-    emit(submitProfile(profile));
+    emit(requestNewProfile());
 }

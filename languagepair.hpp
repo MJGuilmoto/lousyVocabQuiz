@@ -31,7 +31,7 @@ public:
     LanguagePair(LanguagePair* existing);
     LanguagePair(std::string myLang1, std::string myLang2, int whichIsHome);
 
-    bool loadFromLine(std::string line);
+    bool loadFromLine(std::string line, int *status);
     std::string exportToLine();
 
     short whichLangIsHome();

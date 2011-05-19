@@ -43,6 +43,13 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setStyleSheet("QLabel#h1 { "
+                    "color: rgb(0,0,120); font: bold 20px }"
+                    "QLabel#h2 { "
+                    "color: rgb(0,0,120); font: bold 16px }"
+                    "QLabel#p { "
+                    "color: black; font: black 14px }"
+                    );
     MainWindow w;
     w.show();
 

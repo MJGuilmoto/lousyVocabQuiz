@@ -21,7 +21,9 @@ public:
     ProfileManager();
 
     UserProfile* createNewProfile(std::string username);
+    UserProfile* createNewProfile(std::string username, std::string fullName);
     UserProfile* loadProfile(std::string username);
+    bool saveProfile(UserProfile *profile);
     bool isValidUsername(std::string username);
     bool profileExists(std::string username);
 

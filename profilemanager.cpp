@@ -31,7 +31,23 @@ UserProfile* ProfileManager::createNewProfile(string username)
     if(!isValidUsername(username))
         throw new InvalidUsernameException;
 
-    return new UserProfile;
+    return new UserProfile(username);
+}
+
+
+/**
+ * Makes a new profile for the username specified.
+ *
+ * @todo Check that this username doesn't exit already (user profileExists()),
+ *  check for other invalid problems, and create the actual file to make sure
+ *  saving the profile will work correctly later.
+ */
+UserProfile* ProfileManager::createNewProfile(string username, string fullName)
+{
+    if(!isValidUsername(username))
+        throw new InvalidUsernameException;
+
+    return new UserProfile(username, fullName);
 }
 
 
@@ -56,6 +72,21 @@ UserProfile* ProfileManager::loadProfile(string username)
     toReturn->loadProfile(filename);
 
     return toReturn;
+}
+
+
+/**
+ * Saves a profile according to the profile's informaion.
+ */
+bool ProfileManager::saveProfile(UserProfile *profile)
+{
+    if(!isValidUsername(profile->getUsername()) || !profile->isValid())
+    {
+        return false;
+    }
+
+    profile->saveProfile(usernameToFilename(profile->getUsername()));
+    return true;
 }
 
 
@@ -105,6 +136,10 @@ string ProfileManager::usernameToFilename(string username)
  */
 bool ProfileManager::isValidUsername(string username)
 {
+    // Dont' allow blank usernames
+    if(username.compare("") == 0)
+        return false;
+
     //! @todo Ideally, just use regex. I was having trouble linking with boost
     string::iterator itr;
     for(itr = username.begin(); itr != username.end(); itr++)

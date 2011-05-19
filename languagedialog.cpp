@@ -46,7 +46,11 @@ LanguageDialog::LanguageDialog(QWidget *parent) : QDialog(parent)
     goButton = new QPushButton(tr("Go!"));
     goButton->setDefault(false);
 
+    backButton = new QPushButton(tr("&Back"));
+    backButton->setDefault(false);
+
     connect(goButton, SIGNAL(clicked()), this, SLOT(goClicked()));
+    connect(backButton, SIGNAL(clicked()), this, SLOT(backClicked()));
 
     // Layouts
     QHBoxLayout *selectNewBox = new QHBoxLayout;
@@ -59,11 +63,15 @@ LanguageDialog::LanguageDialog(QWidget *parent) : QDialog(parent)
     recentBox->addWidget(recentLangText);
     recentBox->addWidget(recentList);
 
+    QHBoxLayout *buttonBox = new QHBoxLayout;
+    buttonBox->addWidget(backButton);
+    buttonBox->addWidget(goButton);
+
     QVBoxLayout *mainBox = new QVBoxLayout;
     mainBox->addWidget(languagePromptText);
     mainBox->addLayout(selectNewBox);
     mainBox->addLayout(recentBox);
-    mainBox->addWidget(goButton);
+    mainBox->addLayout(buttonBox);
 
     setLayout(mainBox);
 
@@ -77,8 +85,6 @@ LanguageDialog::LanguageDialog(QWidget *parent) : QDialog(parent)
  */
 LanguageDialog::~LanguageDialog()
 {
-    //! @todo Remove
-    cout << "Language dialog destroyed." << endl;
 }
 
 /**
@@ -96,5 +102,12 @@ void LanguageDialog::goClicked()
     LanguagePair *languages = new LanguagePair(
             (lang1Select->text()).toStdString(),
             (lang2Select->text()).toStdString(), 1);
-    emit submitLanguagePair(languages);
+
+    emit(submitLanguagePair(languages));
+}
+
+void LanguageDialog::backClicked()
+{
+    emit(back());
+
 }

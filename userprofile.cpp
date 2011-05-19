@@ -4,6 +4,8 @@
  * @author Alex Zirbel
  *
  * Stores all the data associated with a given user.
+ * Contains load and save functions to store this information in a file and to
+ * retrieve the information.
  */
 
 #include "userprofile.hpp"
@@ -11,6 +13,7 @@
 using namespace std;
 using namespace boost;
 
+// Necessary for use in the BOOST_FOREACH macro.
 typedef pair<LanguagePair, MasterList> pair_t;
 
 UserProfile::UserProfile()
@@ -18,8 +21,8 @@ UserProfile::UserProfile()
     username = "";
     fullName = "";
     valid = false;
-    cout << "Blank (invalid) user profile created." << endl;
 }
+
 
 /**
  * Creates a new user profile with minimal information.
@@ -29,8 +32,8 @@ UserProfile::UserProfile(string newUsername)
     username = newUsername;
     fullName = "";
     valid = true;
-    cout << "New user profile created, with username but no full name." << endl;
 }
+
 
 /**
  * Creates a new user profile with full information.
@@ -40,9 +43,16 @@ UserProfile::UserProfile(string newUsername, string newFullName)
     username = newUsername;
     fullName = newFullName;
     valid = true;
-    cout << "New user profile created, with username and password." << endl;
 }
 
+
+/**
+ * Returns the user's master list for the specified languages.
+ * @param languages The language pair to be found.
+ * @return The MasterList containing all words in those languages.
+ * @todo Make sure it doesn't matter which language is home: we should only
+ *  find one set of languages. This should be taken care of already though.
+ */
 MasterList* UserProfile::getMasterListForLanguages(LanguagePair languages)
 {
     if(!valid)
@@ -52,10 +62,16 @@ MasterList* UserProfile::getMasterListForLanguages(LanguagePair languages)
 }
 
 
+/**
+ * Saves all information of a user profile in text format to the specified
+ * profile file.
+ * @param filename The full path and name of the file
+ * @return True if the save was successful, false otherwise.
+ * @todo Don't save as plaintext: encrypt somehow so users don't game the
+ *  system.
+ */
 bool UserProfile::saveProfile(string filename)
 {
-    cout << "Saving profile..." << endl;
-
     if(!valid)
         throw new InvalidUserProfileException;
 
@@ -66,24 +82,15 @@ bool UserProfile::saveProfile(string filename)
     if(!userFile.is_open())
         return false;
 
-    cout << "Printing user info." << endl;
-
     userFile << username << endl;
     userFile << fullName << endl;
 
-    cout << "Masterlistmap size: " << masterListMap.size() << endl;
-
     BOOST_FOREACH(pair_t pair, masterListMap)
     {
-        cout << "Printing master list." << endl;
-
         userFile << "---\n";
 
         LanguagePair lp = pair.first;
         MasterList list = pair.second;
-
-        lp.printContents();
-        list.printContents();
 
         userFile << lp.lang1 << "\t" << lp.lang2 << "\t"
                 << lp.homeLang << endl;
@@ -98,16 +105,17 @@ bool UserProfile::saveProfile(string filename)
 
     userFile.close();
 
-    cout << "Saved profile." << endl;
-
     return true;
 }
 
 
+/**
+ * Loads a user profile from a file and sets the valid tag to true.
+ * @param filename The file containing correctly formatted UserProfile data
+ * @return True if the load was successful, false otherwise.
+ */
 bool UserProfile::loadProfile(string filename)
 {
-    cout << "Loading profile..." << endl;
-
     // Temporarily holds lines read from the file
     string line;
 
@@ -138,6 +146,10 @@ bool UserProfile::loadProfile(string filename)
 
     getline(userFile, line);
 
+    // Clear out any masterLists in case load is called after some
+    // other initialization.
+    masterListMap.clear();
+
     // Loop to load a master list for each language pair
     while(userFile.good())
     {
@@ -155,7 +167,9 @@ bool UserProfile::loadProfile(string filename)
 
         // Load the language pair
         LanguagePair *languages = new LanguagePair;
-        if(!languages->loadFromLine(line))
+        int status;
+
+        if(!languages->loadFromLine(line, &status))
         {
             cout << "Problem loading language pair." << endl;
             free(languages);
@@ -169,22 +183,27 @@ bool UserProfile::loadProfile(string filename)
             continue;
         }
 
+        /* Essentially undoes the alphabetical sorting. This is necessary for
+           the moment: adding connections needs the languages unsorted again,
+           and the connections will sort themselves upon construction. */
+        string myLang1 = (status == 0) ? languages->lang1 : languages->lang2;
+        string myLang2 = (status == 0) ? languages->lang2 : languages->lang1;
+
         MasterList *mList = new MasterList(*languages);
 
         // Fill the master list with connections
         while(userFile.good())
         {
             getline(userFile, line);
-            cout << "Got line: <" << line << ">" << endl;
 
             if(line.compare("---") == 0 || line.compare("\n") == 0 || line.empty())
                 break;
 
             Connection *conn = new Connection;
 
-            //! @todo Maintain a list of failed loads and print error reports.
             // Add the connection to the list if the connection loaded.
-            if(conn->loadFromLine(line, languages->lang1, languages->lang2))
+            //! @todo Maintain a list of failed loads and print error reports.
+            if(conn->loadFromLine(line, myLang1, myLang2))
             {
                 mList->connList.push_back(*conn);
             }
@@ -201,11 +220,24 @@ bool UserProfile::loadProfile(string filename)
     userFile.close();
 
     valid = true;
-
-    //debug
-    //! @todo remove
-    saveProfile("/home/azirbel/Desktop/temp.txt");
-
-    cout << "Loaded user profile." << endl;
     return true;
+}
+
+
+string UserProfile::getUsername()
+{
+    return username;
+}
+
+
+
+string UserProfile::getFullName()
+{
+    return fullName;
+}
+
+
+bool UserProfile::isValid()
+{
+    return valid;
 }

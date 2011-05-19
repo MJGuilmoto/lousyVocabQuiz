@@ -21,22 +21,24 @@ class LoginDialog : public QDialog
 {
     Q_OBJECT
 
+ProfileManager *profileManager;
+
+QLabel *loginPrompt;
+QLineEdit *usernameLineEdit;
+QPushButton *loginButton;
+QPushButton *newProfileButton;
+
 public:
     LoginDialog(QWidget *parent = 0);
     ~LoginDialog();
 
 signals:
     void submitProfile(UserProfile *profile);
+    void requestNewProfile();
 
 private slots:
     void loginClicked();
     void newProfileClicked();
-
-private:
-    QLabel *loginPrompt;
-    QLineEdit *usernameLineEdit;
-    QPushButton *loginButton;
-    QPushButton *newProfileButton;
 };
 
-#endif // QUIZDIALOG_H
+#endif // LOGINDIALOG_H

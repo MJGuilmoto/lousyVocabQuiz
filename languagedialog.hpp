@@ -30,6 +30,7 @@ QLineEdit *lang2Select;
 //! @todo Change to a drop-down menu
 QLineEdit *recentList;
 QPushButton *goButton;
+QPushButton *backButton;
 
 public:
     LanguageDialog(QWidget *parent = 0);
@@ -37,10 +38,13 @@ public:
 
 signals:
     void submitLanguagePair(LanguagePair *languages);
+    void back();
 
 private slots:
     void goClicked();
+    void backClicked();
 
 };
 
 #endif // LANGUAGEDIALOG_H
+

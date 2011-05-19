@@ -15,6 +15,7 @@ HEADERS += connection.hpp \
            logindialog.hpp \
            mainwindow.hpp \
            menudialog.hpp \
+           newprofiledialog.hpp \
            profilemanager.hpp \
            quizdialog.hpp \
            quizlist.hpp \
@@ -28,6 +29,7 @@ SOURCES += connection.cpp \
            main.cpp \
            mainwindow.cpp \
            menudialog.cpp \
+           newprofiledialog.cpp \
            profilemanager.cpp \
            quizdialog.cpp \
            quizlist.cpp \
